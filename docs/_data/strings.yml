@@ -34,6 +34,10 @@ en:
     skip_link: "Skip to main content"
     nav_label: "Main navigation"
     search_label: "Search"
+    # Label names the language the reader would switch to, written in that
+    # language, so it reads correctly to someone who cannot read this page.
+    lang_switch_label: "Français"
+    lang_switch_aria: "Switch to the French edition of this page"
 
 # ---------------------------------------------------------------------------
 # French (secondary locale, served under /fr/)
@@ -47,3 +51,5 @@ fr:
     skip_link: "Aller au contenu principal"
     nav_label: "Navigation principale"
     search_label: "Rechercher"
+    lang_switch_label: "English"
+    lang_switch_aria: "Passer à la version anglaise de cette page"

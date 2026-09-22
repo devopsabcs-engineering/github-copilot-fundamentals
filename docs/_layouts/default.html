@@ -28,6 +28,24 @@ layout: table_wrappers
 {%- assign ui = strings.ui -%}
 
 {%- comment -%}
+  Every page exists in both locales at the same path, with the French copy under
+  a /fr prefix, so the counterpart URL is derived rather than declared per page.
+  page.url is "/" for the English home page and "/fr/" for the French one, which
+  is why removing the prefix has to be floored back to "/".
+{%- endcomment -%}
+{%- if page_lang == 'fr' -%}
+  {%- assign counterpart_lang = 'en' -%}
+  {%- assign counterpart_path = page.url | remove_first: '/fr' -%}
+  {%- if counterpart_path == '' -%}
+    {%- assign counterpart_path = '/' -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign counterpart_lang = 'fr' -%}
+  {%- capture counterpart_path -%}/fr{{ page.url }}{%- endcapture -%}
+{%- endif -%}
+{%- assign counterpart_url = counterpart_path | relative_url -%}
+
+{%- comment -%}
   Upstream site_nav.html emits the literal aria-label="Main" on the nav element.
 {%- endcomment -%}
 {%- assign upstream_nav_label = 'aria-label="Main"' -%}
@@ -76,6 +94,13 @@ layout: table_wrappers
       {% include components/breadcrumbs.html %}
       <div id="main-content" class="main-content">
         <main>
+          <div class="lang-switch">
+            <a class="lang-switch-link"
+               href="{{ counterpart_url }}"
+               lang="{{ counterpart_lang }}"
+               hreflang="{{ counterpart_lang }}"
+               aria-label="{{ ui.lang_switch_aria | escape }}">{{ ui.lang_switch_label | escape }}</a>
+          </div>
           {% if site.heading_anchors != false %}
             {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#svg-link\"></use></svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
           {% else %}

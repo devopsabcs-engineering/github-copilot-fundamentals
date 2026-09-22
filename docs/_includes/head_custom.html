@@ -1,0 +1,55 @@
+{%- comment -%}
+  Just the Docs builds one navigation list for the whole site, so every page
+  would otherwise show both locales interleaved in the sidebar. There is no
+  theme setting for a per-locale nav, so the other locale is hidden per page.
+
+  Every French page is served under /fr/, and the French home page is exactly
+  that prefix, so a single prefix test classifies every nav link. The prefix is
+  resolved through relative_url so this keeps working under site.baseurl.
+
+  Hiding rather than omitting is deliberate: the links stay in the document, so
+  the built nav remains identical for both locales and a reader who lands on a
+  French page with CSS disabled can still reach every page.
+
+  The [href] guard matters. The theme drops the href from the link for the page
+  being viewed, and without the guard the negated French rule would match that
+  bare anchor and hide the current page from its own sidebar.
+{%- endcomment -%}
+{%- assign page_lang = page.lang | default: site.lang | default: 'en' -%}
+{%- assign fr_prefix = '/fr/' | relative_url -%}
+<style>
+  {%- if page_lang == 'fr' %}
+  #site-nav .nav-list-item:has(> a.nav-list-link[href]:not([href^="{{ fr_prefix }}"])) { display: none; }
+  {%- else %}
+  #site-nav .nav-list-item:has(> a.nav-list-link[href^="{{ fr_prefix }}"]) { display: none; }
+  {%- endif %}
+  .nav-list-item.lang-hidden { display: none !important; }
+
+  .lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .lang-switch-link {
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid #d0d7de;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+</style>
+<script>
+  // Fallback for browsers that do not support the CSS :has() selector.
+  document.addEventListener('DOMContentLoaded', function () {
+    var frPrefix = {{ fr_prefix | jsonify }};
+    var isFrPage = {{ page_lang | jsonify }} === 'fr';
+    document.querySelectorAll('#site-nav .nav-list-item').forEach(function (item) {
+      var link = item.querySelector('a.nav-list-link');
+      if (!link || !link.hasAttribute('href')) return;
+      var isFrLink = (link.getAttribute('href') || '').indexOf(frPrefix) === 0;
+      if (isFrPage !== isFrLink) item.classList.add('lang-hidden');
+    });
+  });
+</script>
