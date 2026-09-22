@@ -1,0 +1,21 @@
+{
+  "name": "copilot-workshop-fixture",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Neutral, originally authored practice fixture for the GitHub Copilot fundamentals workshop. Validates synthetic content requests and depends on nothing beyond a test runner and a type checker.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --strict --skipLibCheck --target ES2022 --module ESNext --moduleResolution Bundler lib/scenario-engine/types.ts lib/scenario-engine/validateGenerateRequest.ts lib/scenario-engine/validateGenerateRequest.test.ts",
+    "reset": "node scripts/reset.mjs",
+    "self-check": "node scripts/self-check.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
+  }
+}

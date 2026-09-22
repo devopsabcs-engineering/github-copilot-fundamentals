@@ -1,0 +1,15 @@
+# Code owners for this repository.
+#
+# PLACEHOLDER: @devopsabcs-engineering/workshop-maintainers is not a confirmed
+# team. Replace it with a real GitHub team or user handle before relying on
+# this file. An unresolvable owner does not block a merge, so the workflow
+# review requirement below is NOT enforceable until that replacement happens.
+# Branch protection with "Require review from Code Owners" must also be enabled
+# on the default branch for any rule here to take effect.
+
+# Workflow changes require named review. Workflows hold the publication and
+# deployment permissions, so they are the highest-risk path in the repository.
+/.github/workflows/ @devopsabcs-engineering/workshop-maintainers
+
+# Decision record and shared strings drive legal and confidentiality posture.
+/docs/_data/ @devopsabcs-engineering/workshop-maintainers

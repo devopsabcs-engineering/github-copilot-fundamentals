@@ -1,0 +1,59 @@
+# Jekyll configuration for the bilingual GitHub Copilot fundamentals workshop.
+#
+# The build source is this docs/ directory only. No path outside docs/ appears
+# anywhere in this file, and the workflow passes "source: ./docs" so the
+# repository root is never handed to Jekyll. Exclusions below are a second line
+# of defence, not the primary control.
+
+title: GitHub Copilot Fundamentals
+description: A bilingual GitHub Copilot fundamentals workshop in English and French.
+
+# Recorded in docs/_data/decisions.yml under "site". That entry has status
+# "recorded_default": the live Pages settings were never verified against the
+# repository, so these values are the recorded intent rather than a confirmation.
+url: "https://devopsabcs-engineering.github.io"
+baseurl: "/github-copilot-fundamentals"
+
+# Pinned to an immutable commit. A major or minor tag is mutable, so a tag is not
+# a control. This pin is also load-bearing beyond supply chain: the vendored
+# layout in docs/_layouts/default.html is matched against the markup of this
+# exact theme revision.
+remote_theme: just-the-docs/just-the-docs@fd0e728ec85bc28e282b449786f5511aeac305fa # v0.11.1
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-relative-links
+
+# Site-level fallback only. Every page resolves its own language from page.lang
+# and falls back to this value. See the defaults block below, which assigns
+# page.lang by path, and the vendored layout, which renders the html lang
+# attribute from the page value rather than from this one.
+lang: en
+
+search_enabled: true
+heading_anchors: true
+color_scheme: light
+
+# Scopes are evaluated in order and the last matching scope wins, so the fr
+# scope must follow the site-wide scope to override it.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      lang: en
+  - scope:
+      path: "fr"
+    values:
+      layout: default
+      lang: fr
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .bundle
+  - vendor
+  - node_modules
+  - .jekyll-cache
+  - .jekyll-metadata
+  - .sass-cache

@@ -1,0 +1,49 @@
+# Shared strings for the bilingual GitHub Copilot fundamentals workshop.
+#
+# Authored once during Implementation Phase 1, Step 1.4.
+#
+# RULES
+# 1. The non-association disclaimer is authored here exactly once per locale.
+#    Phases 5, 6, 7, and 8 must REFERENCE it, never retype it.
+# 2. Everything under "invariant" is a software literal. It is byte-identical
+#    across every locale and must never be translated, re-cased, re-spaced, or
+#    re-punctuated. Translating any of it breaks the exercise.
+
+# ---------------------------------------------------------------------------
+# Invariant software literals. Never translate. Byte-identical in all locales.
+# ---------------------------------------------------------------------------
+invariant:
+  constant_name: "MAX_TITLE_LENGTH"
+  constant_value: 80
+  error_message: "Title must be at most 80 code units"
+  function_name: "validateGenerateRequest"
+  files:
+    types: "types.ts"
+    implementation: "validateGenerateRequest.ts"
+    test: "validateGenerateRequest.test.ts"
+
+# ---------------------------------------------------------------------------
+# English (primary locale, served at the site root)
+# ---------------------------------------------------------------------------
+en:
+  locale: "en"
+  disclaimer:
+    title: "Independent educational resource"
+    body: "This workshop is an independent educational resource. It is not affiliated with, endorsed by, or sponsored by GitHub or Microsoft. All product names and trademarks are the property of their respective owners."
+  ui:
+    skip_link: "Skip to main content"
+    nav_label: "Main navigation"
+    search_label: "Search"
+
+# ---------------------------------------------------------------------------
+# French (secondary locale, served under /fr/)
+# ---------------------------------------------------------------------------
+fr:
+  locale: "fr"
+  disclaimer:
+    title: "Ressource éducative indépendante"
+    body: "Cet atelier est une ressource éducative indépendante. Il n'est ni affilié à GitHub ou Microsoft, ni approuvé ou parrainé par ces sociétés. Tous les noms de produits et toutes les marques de commerce appartiennent à leurs propriétaires respectifs."
+  ui:
+    skip_link: "Aller au contenu principal"
+    nav_label: "Navigation principale"
+    search_label: "Rechercher"

@@ -1,0 +1,11 @@
+# Ruby dependencies for a local build of the docs/ site.
+#
+# Both gems are pinned to explicit versions rather than to a pessimistic
+# constraint. The hosted GitHub Pages build environment resolves its own gem
+# set, so this file makes the local build reproducible; it does not make a local
+# build byte-identical to the one actions/jekyll-build-pages produces.
+
+source "https://rubygems.org"
+
+gem "github-pages", "232", group: :jekyll_plugins
+gem "webrick", "1.9.2"

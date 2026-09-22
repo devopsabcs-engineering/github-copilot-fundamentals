@@ -1,0 +1,101 @@
+---
+layout: table_wrappers
+---
+
+{%- comment -%}
+  Vendored from just-the-docs/just-the-docs v0.11.1, _layouts/default.html, at
+  commit fd0e728ec85bc28e282b449786f5511aeac305fa. The theme is MIT licensed and
+  its notice is retained at docs/assets/licenses/just-the-docs.txt.
+
+  Two deliberate changes against upstream:
+
+  1. Upstream renders the html lang attribute from site.lang alone, so a French
+     page would declare English no matter what its front matter says. It is
+     rendered here from page.lang with a site.lang fallback.
+
+  2. Upstream hard codes the skip link, the main navigation label, and the search
+     label in English. All three are read here from docs/_data/strings.yml for
+     the resolved page language.
+
+  The navigation and search labels live inside theme includes that this site does
+  not override, so their upstream text is substituted after the include renders.
+  That substitution is matched against the markup of the pinned commit above.
+  Changing remote_theme in _config.yml requires rechecking it.
+{%- endcomment -%}
+
+{%- assign page_lang = page.lang | default: site.lang | default: 'en' -%}
+{%- assign strings = site.data.strings[page_lang] | default: site.data.strings.en -%}
+{%- assign ui = strings.ui -%}
+
+{%- comment -%}
+  Upstream site_nav.html emits the literal aria-label="Main" on the nav element.
+{%- endcomment -%}
+{%- assign upstream_nav_label = 'aria-label="Main"' -%}
+{%- capture localized_nav_label -%}aria-label="{{ ui.nav_label | escape }}"{%- endcapture -%}
+
+{%- comment -%}
+  Upstream search_placeholder_custom.html emits "Search " followed by the site
+  title, and search_header.html renders that string twice: once as the input
+  placeholder and once as the screen-reader label. Deriving the search target
+  from site.title rather than hard coding it keeps this working if the title
+  changes.
+{%- endcomment -%}
+{%- capture upstream_search_label -%}Search {{ site.title }}{%- endcapture -%}
+{%- assign upstream_search_label = upstream_search_label | strip -%}
+{%- assign localized_search_label = ui.search_label | escape -%}
+
+{%- comment -%}
+  Upstream decides sidebar visibility with a three-branch conditional around the
+  include itself. The same conditions are kept, resolved to a single flag so the
+  include and its label substitution appear only once.
+{%- endcomment -%}
+{%- assign show_sidebar = false -%}
+{%- if page.nav_enabled == true -%}
+  {%- assign show_sidebar = true -%}
+{%- elsif layout.nav_enabled == true and page.nav_enabled == nil -%}
+  {%- assign show_sidebar = true -%}
+{%- elsif site.nav_enabled != false and layout.nav_enabled == nil and page.nav_enabled == nil -%}
+  {%- assign show_sidebar = true -%}
+{%- endif -%}
+
+<!DOCTYPE html>
+
+<html lang="{{ page_lang | escape }}">
+{% include head.html %}
+<body>
+  <a class="skip-to-main" href="#main-content">{{ ui.skip_link | escape }}</a>
+  {% include icons/icons.html %}
+  {% if show_sidebar %}
+    {% capture theme_sidebar %}{% include components/sidebar.html %}{% endcapture %}
+    {{ theme_sidebar | replace: upstream_nav_label, localized_nav_label }}
+  {% endif %}
+  <div class="main" id="top">
+    {% capture theme_header %}{% include components/header.html %}{% endcapture %}
+    {{ theme_header | replace: upstream_search_label, localized_search_label }}
+    <div class="main-content-wrap">
+      {% include components/breadcrumbs.html %}
+      <div id="main-content" class="main-content">
+        <main>
+          {% if site.heading_anchors != false %}
+            {% include vendor/anchor_headings.html html=content beforeHeading="true" anchorBody="<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><use xlink:href=\"#svg-link\"></use></svg>" anchorClass="anchor-heading" anchorAttrs="aria-labelledby=\"%html_id%\"" %}
+          {% else %}
+            {{ content }}
+          {% endif %}
+
+          {% if page.has_toc != false %}
+            {% include components/children_nav.html %}
+          {% endif %}
+        </main>
+        {% include components/footer.html %}
+      </div>
+    </div>
+    {% if site.search_enabled != false %}
+      {% include components/search_footer.html %}
+    {% endif %}
+  </div>
+
+  {% if site.mermaid %}
+    {% include components/mermaid.html %}
+  {% endif %}
+</body>
+</html>

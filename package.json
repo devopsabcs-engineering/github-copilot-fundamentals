@@ -1,0 +1,23 @@
+{
+  "name": "github-copilot-fundamentals-workshop-build",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build tooling for the bilingual GitHub Copilot fundamentals workshop decks. Not a published package.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:decks": "node scripts/build-workshop-deck.js --out build/decks",
+    "validate:decks": "node scripts/validate-workshop-deck.js docs/assets/decks"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "pptxgenjs": "^4.0.1"
+  },
+  "devDependencies": {
+    "fast-xml-parser": "^4.5.3",
+    "jszip": "^3.10.1"
+  }
+}

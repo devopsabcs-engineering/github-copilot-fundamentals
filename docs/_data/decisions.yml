@@ -1,0 +1,356 @@
+# Phase 0 decision record for the bilingual GitHub Copilot fundamentals workshop.
+#
+# Recorded during Implementation Phase 1, Step 1.4.
+#
+# IMPORTANT: no owner has answered the Phase 0 questions. Every entry below with
+# status "recorded_default" is a stated default recorded to unblock downstream
+# phases. It is NOT a confirmed decision and may be overridden by the owner at
+# any time. Every entry with status "unconfirmed" has no default and still
+# requires an answer.
+
+metadata:
+  recorded_on: "2026-09-22"
+  recorded_by: "Implementation Phase 1, Step 1.4"
+  overall_status: "defaults recorded; zero owner confirmations received"
+  status_legend:
+    confirmed: "answered by a named owner on a recorded date"
+    recorded_default: "no owner answer; stated default recorded to unblock work"
+    unconfirmed: "no owner answer and no default; still blocking"
+
+phase_0_decisions:
+  audience:
+    value: "unconfirmed"
+    status: "unconfirmed"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "Audience composition and TypeScript capability are unknown. This drives exercise difficulty and the Profile 2 decision."
+
+  delivery_profile:
+    value: "Profile 1 (presenter-led, 90 minutes)"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "Stated default. Profile 1 has no hands-on lab, so it does not require verified Copilot entitlement for participants."
+
+  duration:
+    value: "90 minutes"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    allocation_minutes:
+      section_1: 15
+      section_2: 15
+      section_3: 25
+      section_4: 15
+      section_5: 15
+      section_6: 5
+    notes: "Allocation 15/15/25/15/15/5 totals 90 minutes. Timings are planned, not rehearsed."
+
+  language_pair:
+    primary: "English (en)"
+    secondary: "French (fr)"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "English is authored first; French is the paired translation."
+
+  locales:
+    en:
+      path: "/"
+      notes: "English at the site root."
+    fr:
+      path: "/fr/"
+      notes: "French under the /fr/ prefix."
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+
+  projected_language:
+    value: "English"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "Per the R19 screenshot decision, the projected session language is English."
+
+  editor_display_language:
+    value: "English"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "Per the R19 screenshot decision, the editor interface is captured in English. A single screenshot set therefore serves both locales, and French pages reuse English-interface captures with French captions."
+
+  distribution_channel:
+    value: "unconfirmed"
+    status: "unconfirmed"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "How the fixture and decks reach participants is undecided. Only the neutral authored fixture may be distributed through a public repository."
+
+  copilot_entitlement:
+    value: "unconfirmed"
+    status: "unconfirmed"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    required_when: "Profile 2 or Release 3 is adopted"
+    notes: "Verified organization-assigned Business or Enterprise seats are a data-handling control, not a rehearsal detail. Not required while Profile 1 remains the delivered profile."
+
+  fixture_provenance:
+    value: "neutral authored fixture"
+    status: "recorded_default"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    customer_source_extraction: "NOT adopted"
+    notes: "The fixture is originally authored and carries no customer-derived source. Customer-source extraction is an authorized reversible upgrade that has not been taken."
+
+  session_recorded_or_distributed:
+    value: "unconfirmed"
+    status: "unconfirmed"
+    owner: "UNASSIGNED - pending owner confirmation"
+    date: "pending"
+    notes: "If the session is recorded or distributed, the recording becomes a reviewed artifact under the capture hygiene rules."
+
+approvers:
+  source_reuse:
+    approver: "UNASSIGNED"
+    date: "pending"
+    status: "unconfirmed"
+    notes: "No named approver for reuse of any customer-derived source. Not currently required because fixture_provenance is the neutral authored fixture."
+
+  repository_visibility:
+    approver: "UNASSIGNED"
+    date: "pending"
+    status: "unconfirmed"
+    finding_2026_09_22: "Git repo exists, remote is https://github.com/devopsabcs-engineering/github-copilot-fundamentals.git, HEAD fe205f4 == origin/main. CRITICAL: the .copilot-tracking tree IS ALREADY COMMITTED AND PUSHED in commit fe205f4. All 12 tracking files are tracked by git right now (git ls-files .copilot-tracking returns 12 files). Anonymous GitHub API lookup of the repo returns 404, so the remote is NOT publicly readable. Exposure is scoped to accounts with repo access."
+    notes: "OPEN BLOCKER. See open_blockers.already_pushed_tracking_tree. Remediation of already-pushed history is an owner decision that has not been made and was deliberately not acted upon."
+
+  french_reviewer:
+    approver: "UNASSIGNED"
+    date: "pending"
+    status: "unconfirmed"
+    notes: "No named native or fluent French reviewer for the French locale. Blocks acceptance of Release 2."
+
+site:
+  url: "https://devopsabcs-engineering.github.io"
+  baseurl: "/github-copilot-fundamentals"
+  status: "recorded_default"
+  owner: "UNASSIGNED - pending owner confirmation"
+  date: "pending"
+  notes: "Live Pages settings and base path were not verified against the repository settings."
+
+open_blockers:
+  publication_status: "BLOCKED. Do not enable publication until every blocker below is resolved."
+
+  already_pushed_tracking_tree:
+    severity: "critical"
+    opened_on: "2026-09-22"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: "The .copilot-tracking tree is already committed and pushed in commit fe205f4, which is the current HEAD and equals origin/main. All 12 tracking files were tracked by git at the time Phase 1 ran. The tracking tree names a customer, quotes line-level source analysis, and records internal specification paths and environment variable names."
+    mitigating_facts:
+      - "An anonymous GitHub API lookup of the repository returns 404, so the remote is not publicly readable today."
+      - "Exposure is therefore scoped to accounts that already have access to the repository."
+    action_taken_in_phase_1:
+      - "Added .copilot-tracking/ to .gitignore so the tree is excluded going forward."
+      - "Ran git rm -r --cached .copilot-tracking so the tree is untracked in the index. This is a local, reversible index change. It does not touch history and it does not touch the remote."
+    action_NOT_taken:
+      - "No git push, git commit, git reset --hard, git filter-repo, or git filter-branch was run."
+      - "History rewriting is the only remedy once content is pushed, and that is an owner decision that has not been made."
+    decision_required: "The owner must decide whether to rewrite history (for example with git filter-repo followed by a force push and coordination with every clone holder), to accept the exposure given the private visibility, or to recreate the repository. Until that decision is recorded here, publication is blocked."
+
+  no_named_approvers:
+    severity: "high"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: "Source reuse, repository visibility, and French review all have UNASSIGNED approvers with no dates."
+    decision_required: "Name an approver and record a date for each before the first publication."
+
+  codeowners_placeholder:
+    severity: "medium"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: "CODEOWNERS references the placeholder handle @devopsabcs-engineering/workshop-maintainers, which is not a confirmed team. An unresolvable code owner does not block a merge, and branch protection requiring code owner review is not known to be enabled."
+    decision_required: "Replace the placeholder with a real team or user handle and enable Require review from Code Owners on the default branch."
+
+  unconfirmed_phase_0_answers:
+    severity: "high"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: "audience, distribution_channel, copilot_entitlement, and session_recorded_or_distributed have no answer and no default."
+    decision_required: "Answer each, or confirm that Profile 1 with the neutral authored fixture is the delivered scope so that copilot_entitlement stays out of scope."
+
+  # Appended during Implementation Phase 8, Step 8.2.
+  deck_document_properties_not_ratified:
+    severity: "medium"
+    opened_on: "2026-09-22"
+    opened_by: "Implementation Phase 8, Step 8.2"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: >-
+      The neutral document properties embedded in both published decks were
+      proposed by the implementer during Phase 4 and written into
+      slides/content.json under deck.metadata. No owner has ratified them. They
+      are shipped values, not approved values.
+    values_embedded_and_verified_on_2026_09_22:
+      author_dc_creator: "GitHub Copilot Fundamentals Workshop"
+      last_modified_by: "GitHub Copilot Fundamentals Workshop"
+      company: "Independent educational resource"
+      title_en: "GitHub Copilot Fundamentals"
+      title_fr: "GitHub Copilot Fundamentals (fr)"
+      subject_en: "Presenter-led 90-minute GitHub Copilot fundamentals workshop, English"
+      subject_fr: "Atelier de 90 minutes sur les fondamentaux de GitHub Copilot, animé par un présentateur, français"
+    verification_performed:
+      - "Both decks were parsed and their docProps/core.xml and docProps/app.xml values read back and compared against slides/content.json. They match exactly."
+      - "No OS username, machine name, user profile path, or email address appears anywhere in either properties part."
+      - "cp:category, cp:keywords, dc:description, and Manager are absent rather than populated, so no secondary property carries leakage."
+    residual_observation: >-
+      PptxGenJS hardcodes docProps/app.xml Application as "Microsoft Office
+      PowerPoint" and AppVersion as "16.0000". Neither value is configurable
+      through the generator API and neither is personal or organizational
+      leakage, but on a deliverable whose own disclaimer states it is not
+      affiliated with or endorsed by Microsoft, an embedded producing
+      application of "Microsoft Office PowerPoint" is a product attribution the
+      owner has not reviewed.
+    decision_required: >-
+      Ratify or replace the author, company, title, and subject values above,
+      and record a named approver and a date here. Also decide whether the
+      Application property observation is acceptable as is. Until this entry is
+      ratified, the decks may be built and reviewed internally but are not
+      metadata-approved for publication.
+
+# ---------------------------------------------------------------------------
+# Appended during Implementation Phase 5, Step 5.1.
+#
+# Entries below resolve a contradiction between two source documents. They do
+# not require an owner answer, because the plan's acceptance criteria already
+# determine which of the two sources wins. An owner may still override them.
+# ---------------------------------------------------------------------------
+resolved_decisions:
+  section_5_6_boundary:
+    value: "Section 5 runs minutes 70 to 85. Section 6 runs minutes 85 to 90."
+    status: "resolved"
+    resolved_on: "2026-09-22"
+    resolved_by: "Implementation Phase 5, Step 5.1"
+    conflict: >-
+      Two source documents disagree. The research Profile 1 Schedule table puts
+      section 5 at minutes 70 to 84 and the wrap-up at 84 to 90, which is an
+      allocation of 15/15/25/15/14/6. The 22-slide storyboard puts section 5 at
+      70 to 85 and section 6 at 85 to 90, which is 15/15/25/15/15/5.
+    rationale: >-
+      The plan's first success criterion requires the 15/15/25/15/15/5
+      allocation, and decisions.yml already records that allocation under
+      phase_0_decisions.duration.allocation_minutes. Only the storyboard
+      boundary satisfies both, so the storyboard is authoritative. The slide
+      windows in slides/content.json already use it, and the deck generator
+      recomputes and enforces the allocation on every build, so the two would
+      have diverged loudly rather than silently.
+    consequence: >-
+      The one minute of recoverable wrap-up buffer described in the research
+      schedule table does not exist. Section 6 holds exactly the 5 minutes the
+      README gives it. Overrun is absorbed entirely through the published cut
+      order in docs/facilitator-runbook.md, which is the only recovery
+      mechanism the delivered schedule has.
+    affects:
+      - "slides/content.json, sections 5 and 6 and slides S17 through S22"
+      - "docs/facilitator-runbook.md, the run of show and the cut order"
+      - "docs/sections/section-5-agent-mode.md and docs/sections/section-6-wrap-up.md"
+
+# ---------------------------------------------------------------------------
+# Appended during Implementation Phase 7, Step 7.3.
+#
+# This block records the French language review status for Release 2. It is a
+# status record, not a sign-off. Read it before treating the French locale as
+# shippable.
+# ---------------------------------------------------------------------------
+french_language_review:
+  reviewer: "UNASSIGNED"
+  status: "unconfirmed"
+  sign_off_date: "pending"
+  recorded_on: "2026-09-22"
+  recorded_by: "Implementation Phase 7, Step 7.3"
+  authored_by: >-
+    The French locale was authored by the GitHub Copilot coding agent during
+    Implementation Phase 7, Steps 7.1 and 7.2. It was translated and adapted
+    from the English locale authored in Phase 5. No human native or fluent
+    French speaker has read, corrected, or approved any of it.
+  scope_authored:
+    - "slides/content.json, French title, text, and notes for S01 through S22"
+    - "slides/content.json, French section labels, objective labels, asset alt text, and schedule.boundaryNote.fr"
+    - "docs/fr/index.md, docs/fr/prerequisites.md, docs/fr/resources.md, docs/fr/facilitator-runbook.md"
+    - "docs/fr/sections/, all six section pages"
+  machine_checks_that_did_pass:
+    - "Zero placeholder values remain: no manifest value contains the string 'TBD Phase'."
+    - "Zero backslash-u escape sequences remain in any French value or French page."
+    - "Every French string uses real accented characters."
+    - "Invariant software literals are not typed into French content: every French entry resolves them through the same {{strings:...}} tokens or the same site.data.strings.invariant lookups the English entries use, so they are byte-identical across locales by construction."
+    - "node scripts/build-workshop-deck.js --out build/decks exits 0 for both locales, which enforces per-locale completeness and shared-strings token resolution."
+  machine_checks_do_not_establish:
+    - "Terminology correctness, register, or idiom."
+    - "That the French instruction prose teaches the same thing as the English."
+    - "That the French agent prompt in S19 elicits equivalent agent behaviour."
+    - "French typographic refinement. Regular spaces, not U+00A0 non-breaking spaces, precede colons, semicolons, question marks, and exclamation marks throughout."
+  open_blocker:
+    severity: "high"
+    opened_on: "2026-09-22"
+    owner: "UNASSIGNED - pending owner confirmation"
+    finding: >-
+      Acceptance criterion 4 requires a NAMED human French reviewer sign-off for
+      every French page and every French slide. No such reviewer is named, and
+      no sign-off date exists. Machine-authored and machine-checked French does
+      not satisfy that criterion, and the agent that authored this content is
+      explicitly not recorded as its reviewer.
+    consequence: >-
+      Release 2 is not acceptable for delivery or publication on language
+      grounds, independent of every other blocker in this file. The French deck
+      and the French pages may be built and reviewed internally, but they must
+      not be presented to an audience or published until this entry names a
+      reviewer and records a sign-off date.
+    decision_required: >-
+      Name a native or fluent French reviewer, have that person read every
+      French page and every French slide including the speaker notes, and
+      record the name and the sign-off date here. Also see
+      approvers.french_reviewer, which records the same gap at the approver
+      level.
+    review_checklist_for_the_named_reviewer:
+      - "Terminology is consistent. One rendering per concept, as listed in glossary_terms below."
+      - "Invariant software literals were not translated anywhere, including inside the S19 prompt."
+      - "The S19 French prompt still carries both load-bearing clauses: preserve every existing test, and write boundary expectations as literal numbers rather than as references to the constant."
+      - "The observed fixture counts are stated as observed and are identical to the English pages."
+      - "The enum versus required-field asymmetry on S11 and on the section 3 page is stated precisely rather than as a blanket claim."
+      - "Consider substituting U+00A0 before colons, semicolons, question marks, and exclamation marks."
+  glossary_terms:
+    note: >-
+      One rendering was chosen per concept and used consistently across the
+      manifest and every French page. A reviewer replacing any of these should
+      replace every occurrence.
+    terms:
+      prompt: "invite"
+      prompt_engineering: "rédaction d'invites"
+      completion: "complétion"
+      agent_mode: "mode agent"
+      workshop: "atelier"
+      facilitator: "animateur"
+      run_of_show: "déroulé"
+      slide: "diapositive"
+      speaker_notes: "notes du présentateur"
+      fixture: "projet d'exercice"
+      test_case: "cas de test"
+      baseline: "référence"
+      seeded_fault: "anomalie introduite"
+      guard: "garde"
+      trimming: "suppression des espaces"
+      enum: "énumération"
+      diff: "diff"
+      refactor: "remaniement"
+      review_noun: "relecture"
+      inspect: "inspecter"
+      fallback: "solution de repli"
+      cut_order: "ordre des coupes"
+      hard_stop: "arrêt impératif"
+      exit_ticket: "billet de sortie"
+      boundary_case: "cas limite"
+      literal_numbers: "nombres littéraux"
+      code_units: "unités de code"
+      exit_code: "code de sortie"
+      recorded_not_live: "enregistré, par opposition à en direct"
+      blast_radius: "périmètre d'impact"
+      pristine_copy: "copie d'origine"
+      reset: "réinitialisation"
+      misconception: "idée reçue"
+      pull_request: "demande de tirage"
+      mechanical_gate: "contrôle mécanique"
+      judgment_gate: "contrôle de jugement"

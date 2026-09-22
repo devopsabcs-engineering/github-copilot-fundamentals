@@ -1,0 +1,12 @@
+{
+  "//": "Kept deliberately identical to the flags in the package.json typecheck script, so the editor and the command line agree.",
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true
+  },
+  "include": ["lib/**/*.ts"]
+}

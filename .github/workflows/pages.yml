@@ -1,0 +1,113 @@
+name: Documentation Pages
+
+# A fork pull request builds untrusted configuration on a runner. This workflow
+# gives that build no write scope, no secrets, no environment, and no artifact
+# upload. That is necessary but not sufficient on its own: the repository must
+# also be set to require approval for workflow runs from fork pull requests,
+# under Settings > Actions > General > Fork pull request workflows. That is a
+# repository setting, not a property this file can declare.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+# No scope is granted by default. Job-level permissions REPLACE this block
+# rather than merging with it, so every job restates everything it needs.
+permissions: {}
+
+# The single documented Pages concurrency group, not a per-ref group. Queued
+# runs wait for the in-progress run instead of cancelling it, because a Pages
+# deployment interrupted part way through can leave the live site serving a
+# partially replaced artifact.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Restated in full because job-level permissions replace the workflow-level
+    # block. pages: read is the least scope configure-pages needs to read the
+    # Pages configuration. No pages write scope reaches this job, so a pull
+    # request build cannot publish.
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Configure Pages
+        # Skipped on pull requests so that a pull request check does not depend
+        # on Pages being enabled for the repository. url and baseurl are fixed
+        # in docs/_config.yml, so the build does not consume any output here.
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
+      - name: Build the docs directory only
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ./docs
+          destination: ./_site
+
+      - name: Validate the build output
+        shell: bash
+        # Every value below is a literal. No event data is interpolated into any
+        # run step in this workflow, so a branch name, title, or body cannot
+        # inject shell here.
+        run: |
+          set -euo pipefail
+          test -d _site
+          test ! -e _site/.copilot-tracking
+          test ! -e _site/.git
+          test ! -e _site/Gemfile
+          test ! -e _site/Gemfile.lock
+          # The locale entry points are authored in a later phase. Assert the
+          # language attribute for each one only once the page exists, so this
+          # check does not fail the build before that content lands.
+          if [ -f _site/index.html ]; then
+            grep -q '<html lang="en"' _site/index.html
+          fi
+          if [ -f _site/fr/index.html ]; then
+            grep -q '<html lang="fr"' _site/fr/index.html
+          fi
+
+      - name: Upload the Pages artifact
+        # Pull requests build and validate but never upload. The artifact is
+        # downloadable by anyone with repository read access for its retention
+        # period, so it is produced only for the branch that is allowed to
+        # deploy.
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        with:
+          path: ./_site
+
+  deploy:
+    # Pull requests never reach this job, so the write scope below is never
+    # granted to a run triggered by a pull request.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the approved artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

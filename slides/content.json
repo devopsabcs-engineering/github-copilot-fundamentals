@@ -1,0 +1,703 @@
+{
+  "manifestVersion": 1,
+  "contentStatus": "bilingual-authored",
+  "contentStatusNote": "Structural skeleton authored in Implementation Phase 4. English locale text, speaker notes, section labels, and asset alt text authored in Implementation Phase 5 from the observed fixture record in workshop/fixture/VERIFICATION.md. French locale text, speaker notes, section labels, objective labels, and asset alt text authored in Implementation Phase 7 from the same observed record. No placeholder remains. The French locale is machine-authored and still awaits a named human French reviewer; see docs/_data/decisions.yml under french_language_review.",
+  "sharedStrings": {
+    "file": "docs/_data/strings.yml",
+    "referenceSyntax": "{{strings:<dot.separated.path>}}",
+    "note": "The generator reads this YAML file at build time and resolves every {{strings:...}} token. This file is the single source of truth for the non-association disclaimer and for the invariant software literals. Never copy those values into this manifest: reference them."
+  },
+  "deck": {
+    "layout": "LAYOUT_WIDE",
+    "widthInches": 13.33,
+    "heightInches": 7.5,
+    "outputBaseName": "github-copilot-fundamentals",
+    "metadata": {
+      "metadataNote": "Deliberately neutral document properties, shipped but not yet ratified by an owner. See open_blockers.deck_document_properties_not_ratified in docs/_data/decisions.yml. The generator sets these explicitly so that nothing is inherited from the build environment. No personal name, account identifier, machine name, or organization name appears here. Phase 8, Step 8.2 re-verifies and scrubs before publication.",
+      "shared": {
+        "author": "GitHub Copilot Fundamentals Workshop",
+        "company": "Independent educational resource"
+      },
+      "byLocale": {
+        "en": {
+          "title": "GitHub Copilot Fundamentals",
+          "subject": "Presenter-led 90-minute GitHub Copilot fundamentals workshop, English"
+        },
+        "fr": {
+          "title": "GitHub Copilot Fundamentals (fr)",
+          "subject": "Atelier de 90 minutes sur les fondamentaux de GitHub Copilot, animé par un présentateur, français"
+        }
+      }
+    }
+  },
+  "locales": {
+    "en": {
+      "code": "en",
+      "label": "English",
+      "outputFile": "github-copilot-fundamentals-en.pptx",
+      "reviewStatus": "content authored in Phase 5; render and inspect in Phase 8"
+    },
+    "fr": {
+      "code": "fr",
+      "label": "Français",
+      "outputFile": "github-copilot-fundamentals-fr.pptx",
+      "reviewStatus": "content authored in Phase 7; awaiting a named French language reviewer, then render and inspect in Phase 8"
+    }
+  },
+  "schedule": {
+    "profile": "Profile 1",
+    "totalMinutes": 90,
+    "source": ".copilot-tracking/research/2026-09-22/bilingual-copilot-workshop-research.md, Profile 1 Schedule",
+    "allocationNote": "The six README sections are allocated 15/15/25/15/15/5 minutes. The generator recomputes this from the sections below and fails if it drifts.",
+    "boundaryNote": {
+      "en": "Section 5 ends at minute 85 and section 6 runs 85 to 90. The research Profile 1 Schedule table instead shows 70 to 84 and 84 to 90. The storyboard boundary used here is authoritative because the acceptance criterion requires the 15/15/25/15/15/5 allocation. The one minute of wrap-up buffer described in that table therefore does not exist. Recorded in docs/_data/decisions.yml under resolved_decisions.section_5_6_boundary.",
+      "fr": "La section 5 se termine à la minute 85 et la section 6 va de 85 à 90. Le tableau d'horaire du profil 1 de la recherche indique au contraire 70 à 84 puis 84 à 90. La limite du scénarimage retenue ici fait autorité, car le critère d'acceptation impose la répartition 15/15/25/15/15/5. La minute de marge de conclusion décrite dans ce tableau n'existe donc pas. Consigné dans docs/_data/decisions.yml sous resolved_decisions.section_5_6_boundary."
+    }
+  },
+  "objectives": {
+    "objectivesNote": "The six README learning objectives, quoted from README.md. Each entry lists every slide that carries it, and every slide in this manifest declares at least one objective, so the mapping is bidirectional with no objective unmapped and no activity unmapped. French labels were added in Phase 7.",
+    "catalog": {
+      "O1": {
+        "en": "Understand the core capabilities of GitHub Copilot",
+        "fr": "Comprendre les capacités fondamentales de GitHub Copilot",
+        "slides": ["S01", "S02", "S04", "S09", "S21"]
+      },
+      "O2": {
+        "en": "Differentiate between Copilot Chat, Code Completions, and Agent Mode",
+        "fr": "Distinguer Copilot Chat, les complétions de code et le mode agent",
+        "slides": ["S01", "S03", "S06", "S07", "S17", "S19", "S21"]
+      },
+      "O3": {
+        "en": "Apply basic prompt engineering techniques",
+        "fr": "Appliquer les techniques de base de rédaction d'invites",
+        "slides": ["S01", "S06", "S13", "S14", "S15", "S16", "S18", "S21"]
+      },
+      "O4": {
+        "en": "Use Copilot to support common development activities",
+        "fr": "Utiliser Copilot pour soutenir les activités de développement courantes",
+        "slides": ["S01", "S07", "S09", "S10", "S11", "S12", "S19"]
+      },
+      "O5": {
+        "en": "Evaluate and review AI-generated outputs responsibly",
+        "fr": "Évaluer et relire de façon responsable les productions générées par l'IA",
+        "slides": ["S01", "S04", "S08", "S10", "S11", "S12", "S14", "S16", "S18", "S20", "S21"]
+      },
+      "O6": {
+        "en": "Confidently begin incorporating AI-assisted development into their daily workflows",
+        "fr": "Commencer avec assurance à intégrer le développement assisté par IA dans leur travail quotidien",
+        "slides": ["S01", "S05", "S21", "S22"]
+      }
+    }
+  },
+  "sections": [
+    {
+      "number": 1,
+      "startMinute": 0,
+      "endMinute": 15,
+      "allocatedMinutes": 15,
+      "label": {
+        "en": "Introduction to GitHub Copilot",
+        "fr": "Introduction à GitHub Copilot"
+      }
+    },
+    {
+      "number": 2,
+      "startMinute": 15,
+      "endMinute": 30,
+      "allocatedMinutes": 15,
+      "label": {
+        "en": "Getting Started with GitHub Copilot",
+        "fr": "Prise en main de GitHub Copilot"
+      }
+    },
+    {
+      "number": 3,
+      "startMinute": 30,
+      "endMinute": 55,
+      "allocatedMinutes": 25,
+      "label": {
+        "en": "Everyday Developer Use Cases",
+        "fr": "Cas d'usage quotidiens du développeur"
+      }
+    },
+    {
+      "number": 4,
+      "startMinute": 55,
+      "endMinute": 70,
+      "allocatedMinutes": 15,
+      "label": {
+        "en": "Prompting Fundamentals",
+        "fr": "Les fondamentaux de l'invite"
+      }
+    },
+    {
+      "number": 5,
+      "startMinute": 70,
+      "endMinute": 85,
+      "allocatedMinutes": 15,
+      "label": {
+        "en": "Introduction to Agent Mode",
+        "fr": "Introduction au mode agent"
+      }
+    },
+    {
+      "number": 6,
+      "startMinute": 85,
+      "endMinute": 90,
+      "allocatedMinutes": 5,
+      "label": {
+        "en": "Wrap-Up and Q and A",
+        "fr": "Conclusion et questions"
+      }
+    }
+  ],
+  "assets": {
+    "assetNote": "Paths are repository-relative. None of these files exist during Phase 4 or Phase 5. Approved screenshots are captured in Phase 8, Step 8.1. The generator warns and skips any asset that is not present.",
+    "catalog": {
+      "V01": {
+        "path": "docs/assets/images/v01-completion-and-accepted-diff.png",
+        "alt": {
+          "en": "An editor showing an inline completion offered for a test assertion, beside the same assertion after it was accepted.",
+          "fr": "Un éditeur affichant une complétion en ligne proposée pour une assertion de test, à côté de la même assertion une fois acceptée."
+        }
+      },
+      "V02": {
+        "path": "docs/assets/images/v02-chat-context-attachment.png",
+        "alt": {
+          "en": "A chat panel with the validator module and the types module attached as context before a question is asked.",
+          "fr": "Un panneau de conversation où le module du validateur et le module des types sont joints comme contexte avant qu'une question ne soit posée."
+        }
+      },
+      "V03": {
+        "path": "docs/assets/images/v03-fixture-before-and-after.png",
+        "alt": {
+          "en": "The synthetic fixture before and after the title length rule, with the three permitted files marked.",
+          "fr": "Le projet d'exercice synthétique avant et après la règle de longueur du titre, avec les trois fichiers autorisés signalés."
+        }
+      },
+      "V04": {
+        "path": "docs/assets/images/v04-failing-test-diff-passing-test.png",
+        "alt": {
+          "en": "A failing focused test run, the diff that restores the trimming guard, and the same run passing afterwards.",
+          "fr": "Une exécution ciblée de tests en échec, le diff qui rétablit la garde de suppression des espaces, puis la même exécution réussie."
+        }
+      },
+      "V05": {
+        "path": "docs/assets/images/v05-mode-comparison.png",
+        "alt": {
+          "en": "A side by side comparison of the ask, edit, and agent surfaces in the editor.",
+          "fr": "Une comparaison côte à côte des surfaces ask, edit et agent dans l'éditeur."
+        }
+      },
+      "V06": {
+        "path": "docs/assets/images/v06-plan-and-approval.png",
+        "alt": {
+          "en": "An agent plan listing the files it intends to change, with the approval prompt visible beside it.",
+          "fr": "Un plan d'agent énumérant les fichiers qu'il compte modifier, avec la demande d'approbation visible à côté."
+        }
+      },
+      "V07": {
+        "path": "docs/assets/images/v07-checkpoint-boundary.png",
+        "alt": {
+          "en": "A checkpoint boundary in the editor showing which changes can be undone as a single unit.",
+          "fr": "Une limite de point de restauration dans l'éditeur, montrant quelles modifications peuvent être annulées d'un seul bloc."
+        }
+      },
+      "V08": {
+        "path": "docs/assets/images/v08-review-cycle-and-route.png",
+        "alt": {
+          "en": "A diagram of the review cycle: prompt, draft, inspect, test, then accept or revise.",
+          "fr": "Un schéma du cycle de relecture : invite, brouillon, inspection, test, puis acceptation ou révision."
+        }
+      }
+    }
+  },
+  "slides": [
+    {
+      "id": "S01",
+      "role": "title",
+      "section": 1,
+      "startMinute": 0,
+      "endMinute": 3,
+      "objectives": ["O1", "O2", "O3", "O4", "O5", "O6"],
+      "assetRefs": ["V08"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "GitHub Copilot Fundamentals",
+          "text": "Profile 1, presenter-led, 90 minutes\nSix sections: 15, 15, 25, 15, 15, and 5 minutes\nEvery demonstration runs against one small synthetic content-request validator\nNo customer code, no production system, no regulated domain",
+          "notes": "Prompt to use: none. Do not open Copilot on this slide.\nExpected observation: the room sees the duration, the section split, and the independence notice before anything else happens.\nSafety note: read the independence notice aloud. State that the practice fixture is synthetic classroom material authored for this workshop, that it validates written content requests only, and that nothing shown today is customer material.\nFallback: if the projector or the deck fails, the same agenda, schedule, and notice are on the workshop site home page and can be read from a laptop.\nTransition: say that the first question is always what this tool actually does, then move to S02.",
+          "disclaimer": {
+            "title": "{{strings:en.disclaimer.title}}",
+            "body": "{{strings:en.disclaimer.body}}"
+          }
+        },
+        "fr": {
+          "title": "Les fondamentaux de GitHub Copilot",
+          "text": "Profil 1, animé par un présentateur, 90 minutes\nSix sections : 15, 15, 25, 15, 15 et 5 minutes\nChaque démonstration s'appuie sur un seul petit validateur synthétique de demandes de contenu\nAucun code client, aucun système de production, aucun domaine réglementé",
+          "notes": "Invite à utiliser : aucune. N'ouvrez pas Copilot sur cette diapositive.\nObservation attendue : la salle voit la durée, la répartition des sections et l'avis d'indépendance avant toute autre chose.\nNote de sécurité : lisez l'avis d'indépendance à voix haute. Précisez que le projet d'exercice est un matériel pédagogique synthétique rédigé pour cet atelier, qu'il ne valide que des demandes de contenu rédactionnel, et que rien de ce qui est montré aujourd'hui n'est un matériel client.\nSolution de repli : si le projecteur ou le diaporama tombe en panne, le même ordre du jour, le même horaire et le même avis figurent sur la page d'accueil du site de l'atelier et peuvent être lus depuis un ordinateur portable.\nTransition : dites que la première question est toujours de savoir ce que cet outil fait réellement, puis passez à S02.",
+          "disclaimer": {
+            "title": "{{strings:fr.disclaimer.title}}",
+            "body": "{{strings:fr.disclaimer.body}}"
+          }
+        }
+      }
+    },
+    {
+      "id": "S02",
+      "section": 1,
+      "startMinute": 3,
+      "endMinute": 7,
+      "objectives": ["O1"],
+      "assetRefs": [],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "What Copilot Actually Does",
+          "text": "Suggests code inline, while you type\nAnswers questions about code you did not write\nDrafts tests, documentation, and change summaries\nPlans and applies edits across several files, which you review before keeping\nIt drafts. You decide what is kept.",
+          "notes": "Prompt to use: none yet. This slide is spoken, so that the first live prompt lands on prepared context rather than on an empty editor.\nExpected observation: at least one person in the room expects autocomplete and nothing more. Name that expectation now so that S04 can correct it.\nSafety note: say plainly that a suggestion is a draft, that it can be confidently wrong, and that accountability for kept code does not move.\nFallback: none needed. No tool is used on this slide.\nTransition: say that the drafting happens on three different surfaces, then move to S03."
+        },
+        "fr": {
+          "title": "Ce que Copilot fait réellement",
+          "text": "Propose du code en ligne, pendant que vous écrivez\nRépond à des questions sur du code que vous n'avez pas écrit\nRédige des tests, de la documentation et des résumés de modifications\nPlanifie et applique des modifications sur plusieurs fichiers, que vous relisez avant de les conserver\nIl rédige un brouillon. C'est vous qui décidez de ce qui est conservé.",
+          "notes": "Invite à utiliser : aucune pour l'instant. Cette diapositive est commentée à l'oral, afin que la première invite en direct s'applique à un contexte préparé plutôt qu'à un éditeur vide.\nObservation attendue : au moins une personne dans la salle n'attend rien de plus qu'une autocomplétion. Nommez cette attente maintenant, pour que S04 puisse la corriger.\nNote de sécurité : dites clairement qu'une suggestion est un brouillon, qu'elle peut être fausse avec assurance, et que la responsabilité du code conservé ne change pas de mains.\nSolution de repli : aucune nécessaire. Aucun outil n'est utilisé sur cette diapositive.\nTransition : dites que cette rédaction se fait sur trois surfaces différentes, puis passez à S03."
+        }
+      }
+    },
+    {
+      "id": "S03",
+      "section": 1,
+      "startMinute": 7,
+      "endMinute": 11,
+      "objectives": ["O2"],
+      "assetRefs": ["V01"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Chat, Completions, and Agent Mode",
+          "text": "Completions: inline and fastest. Best for the next line or the next assertion.\nChat: a question and an answer. Best for explanation and for proposals.\nAgent Mode: a plan, then edits across several files, then a review you perform.\nToday you choose a surface three times: to explain, to complete one assertion, and to make a three-file change.",
+          "notes": "Prompt to use: none. Point at the prepared comparison image rather than generating anything here.\nExpected observation: the room can state one job that each surface is best at. That is the whole target for this slide.\nSafety note: do not present the agent surface as a stronger version of chat. It is a wider blast radius, so it carries a heavier review duty.\nFallback: if the prepared image is missing, draw the three surfaces on the whiteboard as three boxes with one job written under each.\nTransition: say that most disappointment with these tools comes from the wrong expectation rather than the wrong surface, then move to S04."
+        },
+        "fr": {
+          "title": "Chat, complétions et mode agent",
+          "text": "Complétions : en ligne et les plus rapides. Idéales pour la ligne suivante ou l'assertion suivante.\nChat : une question et une réponse. Idéal pour expliquer et pour proposer.\nMode agent : un plan, puis des modifications sur plusieurs fichiers, puis une relecture que vous effectuez.\nAujourd'hui, vous choisissez une surface trois fois : pour expliquer, pour compléter une assertion et pour réaliser une modification sur trois fichiers.",
+          "notes": "Invite à utiliser : aucune. Montrez l'image de comparaison préparée plutôt que de générer quoi que ce soit ici.\nObservation attendue : la salle sait énoncer une tâche pour laquelle chaque surface est la meilleure. C'est tout l'objectif de cette diapositive.\nNote de sécurité : ne présentez pas la surface agent comme une version plus puissante du chat. Son périmètre d'impact est plus large, elle impose donc un devoir de relecture plus lourd.\nSolution de repli : si l'image préparée est absente, dessinez les trois surfaces au tableau sous forme de trois cadres, avec une tâche inscrite sous chacun.\nTransition : dites que la plupart des déceptions avec ces outils viennent d'une mauvaise attente plutôt que d'une mauvaise surface, puis passez à S04."
+        }
+      }
+    },
+    {
+      "id": "S04",
+      "section": 1,
+      "startMinute": 11,
+      "endMinute": 15,
+      "objectives": ["O1", "O5"],
+      "assetRefs": ["V08"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Six Misconceptions",
+          "text": "1. It is just autocomplete\n2. It replaces developers\n3. Generated code is always correct\n4. It is only useful for writing code\n5. You need to be an AI expert to benefit\n6. It removes the need to understand your own code",
+          "notes": "Prompt to use: none. Ask the room which of the six they hear most often, and take two answers only.\nExpected observation: items three and six produce the most disagreement. Let that disagreement stand, because S08, S12, and S20 settle it with real test output rather than with assertion.\nSafety note: item three is the one that causes real defects. Say that the review duty taught in section 5 exists because of it.\nFallback: none needed. No tool is used on this slide.\nTransition: say that the rest of the session is evidence rather than opinion, then move to S05. Under time pressure, drop items five and six here. That is the fourth item in the published cut order."
+        },
+        "fr": {
+          "title": "Six idées reçues",
+          "text": "1. Ce n'est qu'une autocomplétion\n2. Il remplace les développeurs\n3. Le code généré est toujours correct\n4. Il n'est utile que pour écrire du code\n5. Il faut être spécialiste de l'IA pour en tirer parti\n6. Il dispense de comprendre son propre code",
+          "notes": "Invite à utiliser : aucune. Demandez à la salle laquelle des six elle entend le plus souvent, et ne prenez que deux réponses.\nObservation attendue : les points trois et six suscitent le plus de désaccord. Laissez ce désaccord ouvert, car S08, S12 et S20 le tranchent avec de vrais résultats de tests plutôt qu'avec des affirmations.\nNote de sécurité : le point trois est celui qui provoque de vraies anomalies. Dites que le devoir de relecture enseigné en section 5 existe à cause de lui.\nSolution de repli : aucune nécessaire. Aucun outil n'est utilisé sur cette diapositive.\nTransition : dites que le reste de la séance repose sur des éléments de preuve plutôt que sur des opinions, puis passez à S05. Si le temps presse, supprimez ici les points cinq et six. C'est le quatrième élément de l'ordre des coupes publié."
+        }
+      }
+    },
+    {
+      "id": "S05",
+      "section": 2,
+      "startMinute": 15,
+      "endMinute": 18,
+      "objectives": ["O6"],
+      "assetRefs": ["V02"],
+      "invariantRefs": [
+        "invariant.files.types",
+        "invariant.files.implementation",
+        "invariant.files.test"
+      ],
+      "locales": {
+        "en": {
+          "title": "Ready to Work",
+          "text": "On screen: a prepared local TypeScript fixture in the editor, not a browser application\nThree files under lib/scenario-engine/: {{strings:invariant.files.types}}, {{strings:invariant.files.implementation}}, {{strings:invariant.files.test}}\nSign-in and dependencies are verified before the session, never during it\nNothing is installed while you watch",
+          "notes": "Prompt to use: none. Show the three open files and the green baseline test output captured before the room arrived.\nExpected observation: the observed baseline is 24 cases, 24 passed, exit code 0. Say that this is observed on the prepared machine and is not a guarantee for any other machine.\nSafety note: do not run an install, a sign-in, or a first-run setup in front of the room. Setup is pre-work, and this section teaches use rather than setup.\nFallback: if the editor will not start, present the rest of section 2 from the prepared screenshots and announce aloud that they are recorded.\nTransition: say that the fixture is useless to the tool until the tool can see it, then move to S06."
+        },
+        "fr": {
+          "title": "Prêts à travailler",
+          "text": "À l'écran : un projet TypeScript local préparé dans l'éditeur, et non une application web\nTrois fichiers sous lib/scenario-engine/ : {{strings:invariant.files.types}}, {{strings:invariant.files.implementation}}, {{strings:invariant.files.test}}\nLa connexion et les dépendances sont vérifiées avant la séance, jamais pendant\nRien n'est installé sous vos yeux",
+          "notes": "Invite à utiliser : aucune. Montrez les trois fichiers ouverts et la sortie verte des tests de référence, relevée avant l'arrivée de la salle.\nObservation attendue : la référence observée est de 24 cas, 24 réussites, code de sortie 0. Précisez que ce résultat est observé sur la machine préparée et qu'il ne constitue pas une garantie pour une autre machine.\nNote de sécurité : ne lancez ni installation, ni connexion, ni configuration initiale devant la salle. La préparation relève du travail préalable, et cette section enseigne l'usage plutôt que l'installation.\nSolution de repli : si l'éditeur refuse de démarrer, présentez le reste de la section 2 à partir des captures préparées et annoncez à voix haute qu'elles sont enregistrées.\nTransition : dites que ce projet est inutile à l'outil tant que l'outil ne peut pas le voir, puis passez à S06."
+        }
+      }
+    },
+    {
+      "id": "S06",
+      "section": 2,
+      "startMinute": 18,
+      "endMinute": 22,
+      "objectives": ["O2", "O3"],
+      "assetRefs": ["V02"],
+      "invariantRefs": ["invariant.files.types", "invariant.files.implementation"],
+      "locales": {
+        "en": {
+          "title": "Give the Right Context",
+          "text": "Attach {{strings:invariant.files.implementation}} and {{strings:invariant.files.types}} before asking anything\nThe validator takes unknown input and returns a success or error union\nFree text is trimmed. Enum membership is exact and case-sensitive.\nOmitted optional fields stay undefined. The validator never substitutes a default.",
+          "notes": "Prompt to use: attach the two files, then ask, Explain what this module returns and what a success result guarantees. Do not edit any file.\nExpected observation: a good answer names the success or error union, the trimming of free text, and the fact that omitted optional fields stay undefined. Reject any answer claiming the validator fills in a default detail level or output length, because it does not.\nSafety note: attaching more files is not attaching better context. Attach only what the question needs, and never attach an environment file.\nFallback: if the response is unusable, read the documentation comment at the top of the validator aloud. It states the same contract.\nTransition: say that the room will now do the same thing with their own hands, then move to S07."
+        },
+        "fr": {
+          "title": "Fournir le bon contexte",
+          "text": "Joignez {{strings:invariant.files.implementation}} et {{strings:invariant.files.types}} avant de poser la moindre question\nLe validateur accepte une entrée inconnue et renvoie une union succès ou erreur\nLe texte libre est débarrassé de ses espaces de début et de fin. L'appartenance à une énumération est exacte et sensible à la casse.\nLes champs facultatifs omis restent undefined. Le validateur ne substitue jamais de valeur par défaut.",
+          "notes": "Invite à utiliser : joignez les deux fichiers, puis demandez : Explique ce que ce module renvoie et ce que garantit un résultat de succès. Ne modifie aucun fichier.\nObservation attendue : une bonne réponse nomme l'union succès ou erreur, la suppression des espaces autour du texte libre, et le fait que les champs facultatifs omis restent undefined. Refusez toute réponse affirmant que le validateur renseigne un niveau de détail ou une longueur de sortie par défaut, car ce n'est pas le cas.\nNote de sécurité : joindre plus de fichiers n'est pas joindre un meilleur contexte. Ne joignez que ce dont la question a besoin, et ne joignez jamais un fichier d'environnement.\nSolution de repli : si la réponse est inexploitable, lisez à voix haute le commentaire de documentation en tête du validateur. Il énonce le même contrat.\nTransition : dites que la salle va maintenant faire la même chose de ses propres mains, puis passez à S07."
+        }
+      }
+    },
+    {
+      "id": "S07",
+      "section": 2,
+      "startMinute": 22,
+      "endMinute": 28,
+      "objectives": ["O2", "O4"],
+      "assetRefs": ["V01"],
+      "invariantRefs": ["invariant.function_name"],
+      "locales": {
+        "en": {
+          "title": "Activity A: Explain and Complete",
+          "text": "Minute 1: ask chat to explain {{strings:invariant.function_name}}, with no edits\nMinutes 2 to 4: accept one inline completion for a normalized-title assertion, then read it back\nMinutes 5 to 6: on paper, write the one question you would ask about the result type\nCompare your question with the person beside you",
+          "notes": "Prompt to use: Explain what {{strings:invariant.function_name}} returns and what a success result guarantees. Do not edit any file.\nExpected observation: the explanation names the success or error union. The accepted completion asserts the trimmed title, and the focused run stays at 24 cases, 24 passed, exit code 0.\nSafety note: read the suggested assertion out loud before accepting it. An assertion that compiles is not an assertion that is correct, and a wrong assertion that passes is worse than one that fails.\nFallback: if Copilot is unavailable, project the prepared V01 image, announce aloud that it is recorded rather than live, and run the paper half of the activity unchanged.\nTransition: say that accepting is the risky half, then move to S08."
+        },
+        "fr": {
+          "title": "Activité A : expliquer et compléter",
+          "text": "Minute 1 : demandez au chat d'expliquer {{strings:invariant.function_name}}, sans aucune modification\nMinutes 2 à 4 : acceptez une complétion en ligne pour une assertion de titre normalisé, puis relisez-la à voix haute\nMinutes 5 à 6 : sur papier, écrivez l'unique question que vous poseriez sur le type de résultat\nComparez votre question avec celle de votre voisin",
+          "notes": "Invite à utiliser : Explique ce que renvoie {{strings:invariant.function_name}} et ce que garantit un résultat de succès. Ne modifie aucun fichier.\nObservation attendue : l'explication nomme l'union succès ou erreur. La complétion acceptée affirme le titre débarrassé de ses espaces, et l'exécution ciblée reste à 24 cas, 24 réussites, code de sortie 0.\nNote de sécurité : lisez l'assertion proposée à voix haute avant de l'accepter. Une assertion qui compile n'est pas une assertion correcte, et une assertion fausse qui réussit est pire qu'une assertion qui échoue.\nSolution de repli : si Copilot est indisponible, projetez l'image V01 préparée, annoncez à voix haute qu'elle est enregistrée et non en direct, puis menez la partie sur papier sans changement.\nTransition : dites que l'acceptation est la moitié risquée du travail, puis passez à S08."
+        }
+      }
+    },
+    {
+      "id": "S08",
+      "section": 2,
+      "startMinute": 28,
+      "endMinute": 30,
+      "objectives": ["O5"],
+      "assetRefs": ["V01"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Inspect Before Accepting",
+          "text": "Read the completed assertion out loud before you accept it\nA suggestion that compiles is not a suggestion that is correct\nBaseline observed on the prepared machine: 24 cases, 24 passed, exit code 0\nCounts are observed, not guaranteed. A different count is not a failure.",
+          "notes": "Prompt to use: none. This slide inspects what S07 already produced.\nExpected observation: at least one learner accepted a suggestion without reading it. Ask for a show of hands and treat it as normal rather than as something to be embarrassed about.\nSafety note: say that the observed counts depend on the prepared fixture configuration, and that a learner who sees a different number has not failed the activity.\nFallback: if no live suggestion was produced, inspect the prepared V01 image and label it aloud as recorded.\nTransition: say that the next section moves from one assertion to a whole day of ordinary development work, then move to S09."
+        },
+        "fr": {
+          "title": "Inspecter avant d'accepter",
+          "text": "Lisez l'assertion complétée à voix haute avant de l'accepter\nUne suggestion qui compile n'est pas une suggestion correcte\nRéférence observée sur la machine préparée : 24 cas, 24 réussites, code de sortie 0\nLes décomptes sont observés, non garantis. Un décompte différent n'est pas un échec.",
+          "notes": "Invite à utiliser : aucune. Cette diapositive inspecte ce que S07 a déjà produit.\nObservation attendue : au moins un participant a accepté une suggestion sans la lire. Demandez un vote à main levée et traitez-le comme normal plutôt que comme une faute.\nNote de sécurité : précisez que les décomptes observés dépendent de la configuration de tests du projet d'exercice, et qu'un participant qui voit un autre nombre n'a pas raté l'activité.\nSolution de repli : si aucune suggestion en direct n'a été produite, inspectez l'image V01 préparée et annoncez à voix haute qu'elle est enregistrée.\nTransition : dites que la section suivante passe d'une seule assertion à une journée entière de travail de développement ordinaire, puis passez à S09."
+        }
+      }
+    },
+    {
+      "id": "S09",
+      "section": 3,
+      "startMinute": 30,
+      "endMinute": 34,
+      "objectives": ["O1", "O4"],
+      "assetRefs": ["V03"],
+      "invariantRefs": ["invariant.function_name", "invariant.files.implementation"],
+      "locales": {
+        "en": {
+          "title": "Follow One Validation Request",
+          "text": "A synthetic request object enters {{strings:invariant.function_name}} in {{strings:invariant.files.implementation}}\nStep 1 rejects anything that is not a plain object\nStep 2 rejects blank required fields\nStep 3 checks the required category against its enum\nStep 5 trims free text and returns success\nNo user interface, no network, no provider, no environment file",
+          "notes": "Prompt to use: Walk through the validation order in this module and tell me which check runs first for a whitespace-only category. Do not edit any file.\nExpected observation: on the committed baseline, step 2 runs before step 3, so a whitespace-only category is reported as a missing required field rather than as an unsupported enum value. Hold that fact. S10 and S11 depend on it.\nSafety note: the fixture models a request for a short piece of written content and nothing else. Do not let a question pull the demonstration toward a regulated or safety-critical domain.\nFallback: if the response is unusable, read the numbered validation order from the documentation comment in the validator.\nTransition: say that the fixed order is exactly what makes the next failure readable, then move to S10."
+        },
+        "fr": {
+          "title": "Suivre une demande de validation",
+          "text": "Un objet de demande synthétique entre dans {{strings:invariant.function_name}}, dans {{strings:invariant.files.implementation}}\nL'étape 1 rejette tout ce qui n'est pas un objet simple\nL'étape 2 rejette les champs obligatoires vides\nL'étape 3 vérifie la catégorie obligatoire face à son énumération\nL'étape 5 supprime les espaces du texte libre et renvoie un succès\nAucune interface, aucun réseau, aucun fournisseur, aucun fichier d'environnement",
+          "notes": "Invite à utiliser : Parcours l'ordre de validation de ce module et indique quel contrôle s'exécute en premier pour une catégorie composée uniquement d'espaces. Ne modifie aucun fichier.\nObservation attendue : sur la référence validée, l'étape 2 s'exécute avant l'étape 3, si bien qu'une catégorie composée uniquement d'espaces est signalée comme un champ obligatoire manquant plutôt que comme une valeur d'énumération non prise en charge. Retenez ce fait. S10 et S11 en dépendent.\nNote de sécurité : ce projet d'exercice modélise une demande de court contenu rédactionnel et rien d'autre. Ne laissez pas une question entraîner la démonstration vers un domaine réglementé ou critique pour la sécurité.\nSolution de repli : si la réponse est inexploitable, lisez l'ordre de validation numéroté dans le commentaire de documentation du validateur.\nTransition : dites que cet ordre fixe est précisément ce qui rend l'échec suivant lisible, puis passez à S10."
+        }
+      }
+    },
+    {
+      "id": "S10",
+      "section": 3,
+      "startMinute": 34,
+      "endMinute": 39,
+      "objectives": ["O4", "O5"],
+      "assetRefs": ["V04"],
+      "invariantRefs": ["invariant.files.test"],
+      "locales": {
+        "en": {
+          "title": "From Failure to Evidence",
+          "text": "The private guard is seeded with a length-only check, so trimming is lost\nObserved under the fault: 24 cases, 19 passed, 5 failed, exit code 1\nRead the five failing names before changing a single line\nThen rename the private guards for readability, without touching predicates, messages, or order\nNo test in {{strings:invariant.files.test}} is weakened to make the suite green",
+          "notes": "Prompt to use: Here is the failing output and the validator. Which single change to this file would explain all five failures? Propose only, do not edit.\nExpected observation: the five failing cases observed on the prepared machine are, rejects a whitespace-only title as a missing required field, rejects a whitespace-only category as a missing required field, rejects a whitespace-only summary as a missing required field, reports the required-field error before the enum error, and distinguishes a blank category from an unknown category.\nSafety note: this is a deliberately seeded exercise fault, not a defect in any real system. Say so aloud before anyone photographs the screen.\nFallback: if the live run cannot be produced, show the prepared V04 image and the recorded failing output, and announce both aloud as recorded.\nTransition: this slide also carries the guard refactor demonstration, so that a shortened Activity B still covers refactoring. Move to S11."
+        },
+        "fr": {
+          "title": "De l'échec à la preuve",
+          "text": "La garde privée porte une anomalie introduite : un contrôle de longueur seule, qui perd la suppression des espaces\nObservé sous l'anomalie : 24 cas, 19 réussites, 5 échecs, code de sortie 1\nLisez les noms des cinq cas en échec avant de modifier la moindre ligne\nRenommez ensuite les gardes privées pour la lisibilité, sans toucher aux prédicats, aux messages ni à l'ordre\nAucun test de {{strings:invariant.files.test}} n'est affaibli pour faire passer la suite au vert",
+          "notes": "Invite à utiliser : Voici la sortie en échec et le validateur. Quelle modification unique de ce fichier expliquerait les cinq échecs ? Propose seulement, ne modifie rien.\nObservation attendue : les cinq cas en échec observés sur la machine préparée sont les suivants. Rejette un titre composé uniquement d'espaces comme champ obligatoire manquant. Rejette une catégorie composée uniquement d'espaces comme champ obligatoire manquant. Rejette un résumé composé uniquement d'espaces comme champ obligatoire manquant. Signale l'erreur de champ obligatoire avant l'erreur d'énumération. Distingue une catégorie vide d'une catégorie inconnue.\nNote de sécurité : il s'agit d'une anomalie d'exercice introduite volontairement, et non d'un défaut d'un système réel. Dites-le à voix haute avant que quiconque photographie l'écran.\nSolution de repli : si l'exécution en direct est impossible, montrez l'image V04 préparée et la sortie en échec enregistrée, et annoncez à voix haute que les deux sont enregistrées.\nTransition : cette diapositive porte aussi la démonstration du remaniement des gardes, afin qu'une activité B écourtée couvre encore le remaniement. Passez à S11."
+        }
+      }
+    },
+    {
+      "id": "S11",
+      "section": 3,
+      "startMinute": 39,
+      "endMinute": 51,
+      "objectives": ["O4", "O5"],
+      "assetRefs": ["V04"],
+      "invariantRefs": ["invariant.files.implementation", "invariant.files.test"],
+      "locales": {
+        "en": {
+          "title": "Activity B: Fix and Verify",
+          "text": "Before the run: write down how many of the 24 cases you expect to fail\nMinutes 1 to 2: reproduce the fault and read the five failing names\nMinutes 3 to 6: locate the private guard in {{strings:invariant.files.implementation}}\nMinutes 7 to 9: restore whitespace rejection, then rerun\nMinutes 10 to 12: refactor the guard for readability, rerun, then check the change summary against the diff\nNever reach green by weakening an assertion in {{strings:invariant.files.test}}",
+          "notes": "Prompt to use: Restore whitespace rejection in the private guard. Change nothing else. Then, as a separate step, rename the private guards for readability without changing predicates, error strings, or validation order.\nExpected observation: after the repair the run returns to 24 cases, 24 passed, exit code 0, and the case count is unchanged from baseline. Teach the actual asymmetry and do not generalize it: under the seeded fault a whitespace-only title is wrongly accepted with the title normalized to an empty string, but a whitespace-only category is not silently accepted. It reaches the enum check and reports Unsupported category followed by the blank value, rather than the required-field error. A blanket claim that blank values pass under this fault is wrong.\nSafety note: a suite made green by relaxing an assertion has failed this activity even though the count looks right. Say this before the room starts.\nFallback: if Copilot is unavailable, the facilitator applies the one-line repair by hand and the room performs the prediction and the diff review unchanged. If the live run fails, use the recorded failing and passing output and announce it aloud as recorded.\nTransition: say that the fix is only half the work and that the other half is being able to explain it, then move to S12."
+        },
+        "fr": {
+          "title": "Activité B : corriger et vérifier",
+          "text": "Avant l'exécution : notez combien des 24 cas vous vous attendez à voir échouer\nMinutes 1 à 2 : reproduisez l'anomalie et lisez les noms des cinq cas en échec\nMinutes 3 à 6 : localisez la garde privée dans {{strings:invariant.files.implementation}}\nMinutes 7 à 9 : rétablissez le rejet des valeurs composées uniquement d'espaces, puis relancez\nMinutes 10 à 12 : remaniez la garde pour la lisibilité, relancez, puis confrontez le résumé des modifications au diff\nN'atteignez jamais le vert en affaiblissant une assertion de {{strings:invariant.files.test}}",
+          "notes": "Invite à utiliser : Rétablis le rejet des valeurs composées uniquement d'espaces dans la garde privée. Ne change rien d'autre. Ensuite, dans une étape distincte, renomme les gardes privées pour la lisibilité, sans changer les prédicats, les messages d'erreur ni l'ordre de validation.\nObservation attendue : après la correction, l'exécution revient à 24 cas, 24 réussites, code de sortie 0, et le nombre de cas est inchangé par rapport à la référence. Enseignez l'asymétrie réelle sans la généraliser. Sous l'anomalie introduite, un titre composé uniquement d'espaces est accepté à tort, le titre étant normalisé en chaîne vide. En revanche, une catégorie composée uniquement d'espaces n'est pas acceptée silencieusement : elle atteint le contrôle d'énumération et produit l'erreur Unsupported category suivie de la valeur vide, plutôt que l'erreur de champ obligatoire. Affirmer globalement que les valeurs vides passent sous cette anomalie est faux.\nNote de sécurité : une suite rendue verte en relâchant une assertion a échoué à cette activité, même si le décompte semble correct. Dites-le avant que la salle ne commence.\nSolution de repli : si Copilot est indisponible, l'animateur applique la correction d'une ligne à la main et la salle réalise la prédiction et la relecture du diff sans changement. Si l'exécution en direct échoue, utilisez les sorties enregistrées en échec puis en réussite, et annoncez à voix haute qu'elles sont enregistrées.\nTransition : dites que la correction n'est que la moitié du travail et que l'autre moitié consiste à savoir l'expliquer, puis passez à S12."
+        }
+      }
+    },
+    {
+      "id": "S12",
+      "section": 3,
+      "startMinute": 51,
+      "endMinute": 55,
+      "objectives": ["O4", "O5"],
+      "assetRefs": ["V04"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Explain the Change",
+          "text": "Ask for a change summary, then check every claim in it against the diff\nA summary naming a file you did not touch is wrong, however fluent it reads\nTrue here: trimming restored, private guards renamed, behaviour unchanged\nRegenerate the documentation comment last, once the behaviour has settled",
+          "notes": "Prompt to use: Summarize the change I just made, then regenerate the documentation comment for the guard so that it matches the current behaviour.\nExpected observation: the summary should mention only the validator module. If it mentions the types module or the test file, the room has just watched a confident and wrong summary, which is the most useful thing that can happen on this slide.\nSafety note: a change summary is evidence only after it has been checked against the diff. Never paste one into a pull request unread.\nFallback: if no summary can be generated, read the diff aloud and have the room narrate it instead. The learning target is the checking, not the generating.\nTransition: say that every good result so far came from a specific request, then move to S13."
+        },
+        "fr": {
+          "title": "Expliquer la modification",
+          "text": "Demandez un résumé des modifications, puis vérifiez chacune de ses affirmations face au diff\nUn résumé qui nomme un fichier que vous n'avez pas touché est faux, aussi fluide soit-il\nVrai ici : suppression des espaces rétablie, gardes privées renommées, comportement inchangé\nRégénérez le commentaire de documentation en dernier, une fois le comportement stabilisé",
+          "notes": "Invite à utiliser : Résume la modification que je viens de faire, puis régénère le commentaire de documentation de la garde pour qu'il corresponde au comportement actuel.\nObservation attendue : le résumé ne devrait mentionner que le module du validateur. S'il mentionne le module des types ou le fichier de tests, la salle vient d'assister à un résumé assuré et faux, ce qui est la chose la plus utile qui puisse arriver sur cette diapositive.\nNote de sécurité : un résumé des modifications ne devient un élément de preuve qu'après vérification face au diff. Ne le collez jamais dans une demande de tirage sans l'avoir lu.\nSolution de repli : si aucun résumé ne peut être généré, lisez le diff à voix haute et faites-le commenter par la salle. L'objectif d'apprentissage est la vérification, pas la génération.\nTransition : dites que tous les bons résultats obtenus jusqu'ici viennent d'une demande précise, puis passez à S13."
+        }
+      }
+    },
+    {
+      "id": "S13",
+      "section": 4,
+      "startMinute": 55,
+      "endMinute": 59,
+      "objectives": ["O3"],
+      "assetRefs": [],
+      "invariantRefs": ["invariant.constant_value"],
+      "locales": {
+        "en": {
+          "title": "A Prompt With a Testable Outcome",
+          "text": "Four parts: goal, context, constraints, acceptance tests\nGoal: reject titles longer than the limit, measured after trimming\nContext: the three named files and the existing validation order\nConstraints: measure UTF-16 code units, not visible characters\nAcceptance tests: {{strings:invariant.constant_value}} units accepted, 81 units rejected, a padded {{strings:invariant.constant_value}}-unit title accepted",
+          "notes": "Prompt to use: none yet. Read the four parts aloud and point at the acceptance tests, because that is the part almost everyone omits.\nExpected observation: the room recognizes that the first three parts describe intent while only the fourth one can fail. A prompt without acceptance tests cannot be reviewed objectively.\nSafety note: keep the limit and the error text exactly as written. They are software literals, and translating or re-punctuating them breaks the exercise.\nFallback: none needed. No tool is used on this slide.\nTransition: say that the context part is where most prompts quietly fail, then move to S14."
+        },
+        "fr": {
+          "title": "Une invite au résultat vérifiable",
+          "text": "Quatre parties : objectif, contexte, contraintes, tests d'acceptation\nObjectif : rejeter les titres plus longs que la limite, mesurés après suppression des espaces\nContexte : les trois fichiers nommés et l'ordre de validation existant\nContraintes : mesurer des unités de code UTF-16, et non des caractères visibles\nTests d'acceptation : {{strings:invariant.constant_value}} unités acceptées, 81 unités refusées, un titre de {{strings:invariant.constant_value}} unités entouré d'espaces accepté",
+          "notes": "Invite à utiliser : aucune pour l'instant. Lisez les quatre parties à voix haute et désignez les tests d'acceptation, car c'est la partie que presque tout le monde omet.\nObservation attendue : la salle reconnaît que les trois premières parties décrivent une intention alors que seule la quatrième peut échouer. Une invite sans tests d'acceptation ne peut pas être relue objectivement.\nNote de sécurité : conservez la limite et le texte d'erreur exactement tels qu'ils sont écrits. Ce sont des littéraux logiciels, et les traduire ou les reponctuer casse l'exercice.\nSolution de repli : aucune nécessaire. Aucun outil n'est utilisé sur cette diapositive.\nTransition : dites que la partie contexte est l'endroit où la plupart des invites échouent silencieusement, puis passez à S14."
+        }
+      }
+    },
+    {
+      "id": "S14",
+      "section": 4,
+      "startMinute": 59,
+      "endMinute": 62,
+      "objectives": ["O3", "O5"],
+      "assetRefs": ["V02"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Context Is Evidence",
+          "text": "Fix validation is not a prompt. It names no file, no rule, and no test.\nAttach the validator, the types, and the existing tests. Nothing else.\nAttaching more is not attaching better\nThe evidence you attach is the evidence a reviewer can check",
+          "notes": "Prompt to use: run the weak version first, Fix validation, and let the room watch it guess. Then run the specific version from S13 against the same files.\nExpected observation: the weak prompt produces a plausible change to something nobody asked about. The specific prompt produces something that can be accepted or rejected on evidence.\nSafety note: never attach an environment file, a credential file, or customer material as context. Attach only the three fixture files.\nFallback: if only one prompt can be run, run the weak one. The contrast survives, because the failure is the teaching moment.\nTransition: say that the room now writes its own, then move to S15."
+        },
+        "fr": {
+          "title": "Le contexte fournit les éléments de preuve",
+          "text": "Corrige la validation n'est pas une invite. Cela ne nomme ni fichier, ni règle, ni test.\nJoignez le validateur, les types et les tests existants. Rien d'autre.\nJoindre davantage n'est pas joindre mieux\nLes éléments que vous joignez sont ceux qu'un relecteur peut vérifier",
+          "notes": "Invite à utiliser : lancez d'abord la version faible, Corrige la validation, et laissez la salle la regarder deviner. Lancez ensuite la version précise de S13 sur les mêmes fichiers.\nObservation attendue : l'invite faible produit une modification plausible sur un sujet que personne n'a demandé. L'invite précise produit quelque chose qui peut être accepté ou refusé sur pièces.\nNote de sécurité : ne joignez jamais un fichier d'environnement, un fichier d'identifiants ni du matériel client comme contexte. Ne joignez que les trois fichiers du projet d'exercice.\nSolution de repli : si une seule invite peut être lancée, lancez la faible. Le contraste survit, car l'échec est le moment d'apprentissage.\nTransition : dites que la salle rédige maintenant la sienne, puis passez à S15."
+        }
+      }
+    },
+    {
+      "id": "S15",
+      "section": 4,
+      "startMinute": 62,
+      "endMinute": 68,
+      "objectives": ["O3"],
+      "assetRefs": [],
+      "invariantRefs": [
+        "invariant.constant_name",
+        "invariant.constant_value",
+        "invariant.error_message"
+      ],
+      "locales": {
+        "en": {
+          "title": "Activity C: Specify the Title Limit",
+          "text": "Write a prompt that asks for a proposal only. No edits. No commands.\nIt must name {{strings:invariant.constant_name}} = {{strings:invariant.constant_value}}, placement after the enum checks, and the exact error \"{{strings:invariant.error_message}}\"\nIt must name the three permitted files and the three boundary cases\nThen score a partner prompt against the four-part rubric\nIt passes when your partner can restate the intended behaviour from the prompt alone",
+          "notes": "Prompt to use: learners write their own. The proposal-only constraint is mandatory, so every prompt must forbid file edits and command execution.\nExpected observation: most first drafts carry goal and context but omit acceptance tests. That omission is the finding, not a failure.\nSafety note: nothing is executed during this activity. A prompt that would edit a file or run a command has already broken the brief.\nFallback: if Copilot is unavailable, the whole activity still runs. It is written and scored on paper and needs no tool at all.\nTransition: partner scoring is the first item in the published cut order. If the section is running long, drop it and move straight to S16."
+        },
+        "fr": {
+          "title": "Activité C : préciser la limite du titre",
+          "text": "Rédigez une invite qui demande une proposition uniquement. Aucune modification. Aucune commande.\nElle doit nommer {{strings:invariant.constant_name}} = {{strings:invariant.constant_value}}, le placement après les contrôles d'énumération, et l'erreur exacte \"{{strings:invariant.error_message}}\"\nElle doit nommer les trois fichiers autorisés et les trois cas limites\nÉvaluez ensuite l'invite d'un binôme avec la grille en quatre parties\nElle est réussie quand votre binôme peut reformuler le comportement attendu à partir de la seule invite",
+          "notes": "Invite à utiliser : les participants rédigent la leur. La contrainte de proposition uniquement est impérative, donc chaque invite doit interdire la modification de fichiers et l'exécution de commandes.\nObservation attendue : la plupart des premiers jets portent l'objectif et le contexte mais omettent les tests d'acceptation. Cette omission est le constat, pas un échec.\nNote de sécurité : rien n'est exécuté pendant cette activité. Une invite qui modifierait un fichier ou lancerait une commande a déjà rompu la consigne.\nSolution de repli : si Copilot est indisponible, l'activité se déroule intégralement. Elle se rédige et s'évalue sur papier et ne nécessite aucun outil.\nTransition : l'évaluation en binôme est le premier élément de l'ordre des coupes publié. Si la section déborde, supprimez-la et passez directement à S16."
+        }
+      }
+    },
+    {
+      "id": "S16",
+      "section": 4,
+      "startMinute": 68,
+      "endMinute": 70,
+      "objectives": ["O3", "O5"],
+      "assetRefs": [],
+      "invariantRefs": ["invariant.constant_value"],
+      "locales": {
+        "en": {
+          "title": "Iterate With a Reason",
+          "text": "The phrase {{strings:invariant.constant_value}} characters is ambiguous. Bytes, code points, and visible characters all differ.\nSay UTF-16 code units, measured after trimming\nState plainly that this counts code units, not visible characters\nAccented and emoji input is therefore out of scope for this boundary test\nIterate because the prompt was ambiguous, not because the answer was disappointing",
+          "notes": "Prompt to use: correct the ambiguous version live. Replace the phrase with the code-unit wording from S13 and show that only the second version is reviewable.\nExpected observation: the room sees that the second attempt succeeded because the request changed, not because the tool improved.\nSafety note: do not describe this as a limit on visible characters or on graphemes. It is a code-unit limit, and the boundary tests use ASCII only.\nFallback: none needed. This correction can be made verbally against the projected text.\nTransition: say that the room now has a reviewable specification and needs a surface wide enough to apply it, then move to S17."
+        },
+        "fr": {
+          "title": "Itérer avec une raison",
+          "text": "L'expression {{strings:invariant.constant_value}} caractères est ambiguë. Octets, points de code et caractères visibles diffèrent tous.\nDites unités de code UTF-16, mesurées après suppression des espaces\nÉnoncez clairement que l'on compte des unités de code, et non des caractères visibles\nLes entrées accentuées et les émojis sont donc hors du périmètre de ce test de limite\nItérez parce que l'invite était ambiguë, non parce que la réponse était décevante",
+          "notes": "Invite à utiliser : corrigez la version ambiguë en direct. Remplacez l'expression par la formulation en unités de code de S13 et montrez que seule la seconde version est relisible.\nObservation attendue : la salle constate que la seconde tentative a réussi parce que la demande a changé, non parce que l'outil s'est amélioré.\nNote de sécurité : ne décrivez pas cela comme une limite sur les caractères visibles ou sur les graphèmes. C'est une limite en unités de code, et les cas limites n'utilisent que de l'ASCII.\nSolution de repli : aucune nécessaire. Cette correction peut se faire oralement face au texte projeté.\nTransition : dites que la salle dispose maintenant d'une spécification relisible et qu'il lui faut une surface assez large pour l'appliquer, puis passez à S17."
+        }
+      }
+    },
+    {
+      "id": "S17",
+      "section": 5,
+      "startMinute": 70,
+      "endMinute": 73,
+      "objectives": ["O2"],
+      "assetRefs": ["V05"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Ask, Edit, and Agent",
+          "text": "Ask: a question, an answer, no file changes\nEdit: a scoped change to files you chose yourself\nAgent: a plan, then edits across files, then a review you must perform\nChoose the smallest surface that can do the job\nCompare the plans on screen, then pick one and say why",
+          "notes": "Prompt to use: submit the same title-limit request to the ask surface and to the agent surface, then put the two plans side by side.\nExpected observation: the ask surface describes the change, the agent surface proposes to make it. The difference in review duty is visible before any file is touched.\nSafety note: a wider surface is not a better surface. It is a larger blast radius, so it needs a heavier review.\nFallback: if only one surface responds, show the prepared V05 image for the comparison and label it aloud as recorded.\nTransition: this plan comparison is the third item in the published cut order. If time is short, drop it and go straight to S18."
+        },
+        "fr": {
+          "title": "Ask, Edit et Agent",
+          "text": "Ask : une question, une réponse, aucune modification de fichier\nEdit : une modification délimitée aux fichiers que vous avez choisis vous-même\nAgent : un plan, puis des modifications sur plusieurs fichiers, puis une relecture que vous devez effectuer\nChoisissez la plus petite surface capable de faire le travail\nComparez les plans à l'écran, puis choisissez-en un et dites pourquoi",
+          "notes": "Invite à utiliser : soumettez la même demande de limite de titre à la surface ask puis à la surface agent, et placez les deux plans côte à côte.\nObservation attendue : la surface ask décrit la modification, la surface agent propose de la réaliser. L'écart de devoir de relecture est visible avant qu'aucun fichier ne soit touché.\nNote de sécurité : une surface plus large n'est pas une meilleure surface. Son périmètre d'impact est plus grand, elle exige donc une relecture plus lourde.\nSolution de repli : si une seule surface répond, montrez l'image V05 préparée pour la comparaison et annoncez à voix haute qu'elle est enregistrée.\nTransition : cette comparaison de plans est le troisième élément de l'ordre des coupes publié. Si le temps manque, supprimez-la et passez directement à S18."
+        }
+      }
+    },
+    {
+      "id": "S18",
+      "section": 5,
+      "startMinute": 73,
+      "endMinute": 76,
+      "objectives": ["O3", "O5"],
+      "assetRefs": ["V06"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Review the Plan and Permissions",
+          "text": "Read the plan before approving it: which files, in what order, with what error text\nPermitted scope is three files. Anything outside them is a stop, not a warning.\nNo package installs, no network access, no environment files, no regulated-domain content\nApprove a tool run only when the plan matches what you actually asked for",
+          "notes": "Prompt to use: none new. Read the plan the agent produced on S17 and walk the room through the approval decision line by line.\nExpected observation: the plan names the three permitted files. If it names a fourth, decline it in front of the room. A declined plan is a successful demonstration of this slide, not a broken demo.\nSafety note: approval is the control point. Once a tool run is approved, review moves from cheap to expensive.\nFallback: if no live plan exists, review the prepared V06 image and announce aloud that it is recorded.\nTransition: say that the plan is now reviewed and can be applied, then move to S19."
+        },
+        "fr": {
+          "title": "Examiner le plan et les autorisations",
+          "text": "Lisez le plan avant de l'approuver : quels fichiers, dans quel ordre, avec quel texte d'erreur\nLe périmètre autorisé est de trois fichiers. Tout ce qui en sort est un arrêt, pas un avertissement.\nAucune installation de paquet, aucun accès réseau, aucun fichier d'environnement, aucun contenu de domaine réglementé\nN'approuvez l'exécution d'un outil que lorsque le plan correspond à ce que vous avez réellement demandé",
+          "notes": "Invite à utiliser : aucune nouvelle. Lisez le plan produit par l'agent en S17 et guidez la salle ligne par ligne dans la décision d'approbation.\nObservation attendue : le plan nomme les trois fichiers autorisés. S'il en nomme un quatrième, refusez-le devant la salle. Un plan refusé est une démonstration réussie de cette diapositive, pas une démonstration ratée.\nNote de sécurité : l'approbation est le point de contrôle. Une fois l'exécution d'un outil approuvée, la relecture passe de bon marché à coûteuse.\nSolution de repli : s'il n'existe aucun plan en direct, examinez l'image V06 préparée et annoncez à voix haute qu'elle est enregistrée.\nTransition : dites que le plan est maintenant relu et peut être appliqué, puis passez à S19."
+        }
+      }
+    },
+    {
+      "id": "S19",
+      "section": 5,
+      "startMinute": 76,
+      "endMinute": 81,
+      "objectives": ["O2", "O4"],
+      "assetRefs": ["V03"],
+      "invariantRefs": [
+        "invariant.constant_name",
+        "invariant.constant_value",
+        "invariant.error_message",
+        "invariant.files.types",
+        "invariant.files.implementation",
+        "invariant.files.test"
+      ],
+      "locales": {
+        "en": {
+          "title": "Activity D: Implement the Title Limit",
+          "text": "Before the run, write down the two files you would inspect first and why\nExport {{strings:invariant.constant_name}} = {{strings:invariant.constant_value}} from {{strings:invariant.files.types}}\nAdd the check after the enum checks in {{strings:invariant.files.implementation}}\nAppend exactly three boundary cases to {{strings:invariant.files.test}}\nExact error: \"{{strings:invariant.error_message}}\"\nBoundary expectations are literal numbers, never the new constant",
+          "notes": "Prompt to use, carried verbatim from the approved workshop prompt:\nIn this synthetic workshop fixture, add a maximum trimmed title length of {{strings:invariant.constant_value}} JavaScript UTF-16 code units. Modify only {{strings:invariant.files.types}}, {{strings:invariant.files.implementation}}, and {{strings:invariant.files.test}} in lib/scenario-engine/. Export {{strings:invariant.constant_name}} from {{strings:invariant.files.types}}. Preserve existing enums, public signatures, errors, and validation order. Put the new check after the enum checks. Use the error \"{{strings:invariant.error_message}}\". Preserve every existing test and do not weaken, delete, or rewrite any existing assertion. Add tests for {{strings:invariant.constant_value}} units, 81 units, and a padded {{strings:invariant.constant_value}}-unit title, and write those expected boundaries as literal numbers rather than referring to {{strings:invariant.constant_name}}, so the tests fail if the constant is wrong. Do not install packages, access the network, read environment files, or generate content unrelated to this fixture. Run the prepared focused tests and typecheck. Report the diff and the actual results.\nExpected observation: with the three boundary cases added and the rule not yet implemented, the observed result on the prepared machine was 27 cases, 26 passed, 1 failed, exit code 1. After the rule was implemented it was 27 cases, 27 passed, exit code 0. The 24 baseline cases were unchanged in both states.\nSafety note: the two clauses about preserving every existing test and about writing the boundaries as literal numbers are load-bearing. Do not shorten the prompt by removing them. Without them an agent can derive its expectations from the new constant, the suite then passes for any limit value, and the review evidence on S20 collapses.\nFallback: if the agent run cannot be completed live, show the prepared V03 image and the recorded before and after output, and announce aloud that they are recorded.\nTransition: say that the run is finished but the work is not, then move to S20."
+        },
+        "fr": {
+          "title": "Activité D : implémenter la limite du titre",
+          "text": "Avant l'exécution, notez les deux fichiers que vous inspecteriez en premier, et pourquoi\nExportez {{strings:invariant.constant_name}} = {{strings:invariant.constant_value}} depuis {{strings:invariant.files.types}}\nAjoutez le contrôle après les contrôles d'énumération dans {{strings:invariant.files.implementation}}\nAjoutez exactement trois cas limites à {{strings:invariant.files.test}}\nErreur exacte : \"{{strings:invariant.error_message}}\"\nLes bornes attendues sont des nombres littéraux, jamais la nouvelle constante",
+          "notes": "Invite à utiliser, reprise mot pour mot de l'invite d'atelier approuvée :\nDans ce projet d'exercice synthétique, ajoute une longueur maximale de titre de {{strings:invariant.constant_value}} unités de code UTF-16 JavaScript, mesurée après suppression des espaces de début et de fin. Modifie uniquement {{strings:invariant.files.types}}, {{strings:invariant.files.implementation}} et {{strings:invariant.files.test}} dans lib/scenario-engine/. Exporte {{strings:invariant.constant_name}} depuis {{strings:invariant.files.types}}. Conserve les énumérations, les signatures publiques, les erreurs et l'ordre de validation existants. Place le nouveau contrôle après les contrôles d'énumération. Utilise l'erreur \"{{strings:invariant.error_message}}\". Conserve chaque test existant et n'affaiblis, ne supprime et ne réécris aucune assertion existante. Ajoute des tests pour {{strings:invariant.constant_value}} unités, 81 unités et un titre de {{strings:invariant.constant_value}} unités entouré d'espaces, et écris ces bornes attendues sous forme de nombres littéraux plutôt qu'en référence à {{strings:invariant.constant_name}}, afin que les tests échouent si la constante est incorrecte. N'installe aucun paquet, n'accède pas au réseau, ne lis aucun fichier d'environnement et ne génère aucun contenu étranger à ce projet d'exercice. Exécute les tests ciblés et la vérification de types préparés. Présente le diff et les résultats réels.\nObservation attendue : avec les trois cas limites ajoutés et la règle non encore implémentée, le résultat observé sur la machine préparée était de 27 cas, 26 réussites, 1 échec, code de sortie 1. Après implémentation de la règle, il était de 27 cas, 27 réussites, code de sortie 0. Les 24 cas de référence étaient inchangés dans les deux états.\nNote de sécurité : les deux clauses portant sur la conservation de chaque test existant et sur l'écriture des bornes sous forme de nombres littéraux sont déterminantes. Ne raccourcissez pas l'invite en les retirant. Sans elles, un agent peut déduire ses attentes de la nouvelle constante, la suite passe alors au vert pour n'importe quelle valeur de limite, et les éléments de preuve de la relecture en S20 s'effondrent.\nSolution de repli : si l'exécution de l'agent ne peut pas être menée en direct, montrez l'image V03 préparée ainsi que les sorties enregistrées avant et après, et annoncez à voix haute qu'elles sont enregistrées.\nTransition : dites que l'exécution est terminée mais que le travail ne l'est pas, puis passez à S20."
+        }
+      }
+    },
+    {
+      "id": "S20",
+      "section": 5,
+      "startMinute": 81,
+      "endMinute": 85,
+      "objectives": ["O5"],
+      "assetRefs": ["V07"],
+      "invariantRefs": ["invariant.files.test"],
+      "locales": {
+        "en": {
+          "title": "Review, Test, Recover",
+          "text": "Inspect the diff file by file. Three files, and no more.\nObserved before implementation: 27 cases, 26 passed, 1 failed, exit code 1\nObserved after implementation: 27 cases, 27 passed, exit code 0\nThe 24 baseline cases were unchanged in both states\nBoundary expectations in {{strings:invariant.files.test}} are literal numbers, so a wrong constant still fails\nAccept, reject, or revise. Recovery is a reset, not a rewrite.",
+          "notes": "Prompt to use: none. This is human review of what S19 produced, and the review is the point of the slide.\nExpected observation: the diff touches exactly the three permitted files, the baseline cases still pass, and the new cases use literal numbers. Ask the room to name one thing in the generated diff worth changing, and take two answers.\nSafety note: this demonstration is never cut, at any level of overrun. It is the only place where the responsible-review objective is demonstrated against real output. Cut elsewhere first.\nFallback: if nothing was generated live, review the recorded diff and the recorded test output, announce aloud that they are recorded, and label them as recorded on screen. The review discussion runs unchanged.\nTransition: say that recovery here is a reset script rather than an argument with the tool, then move to S21."
+        },
+        "fr": {
+          "title": "Relire, tester, restaurer",
+          "text": "Inspectez le diff fichier par fichier. Trois fichiers, pas un de plus.\nObservé avant implémentation : 27 cas, 26 réussites, 1 échec, code de sortie 1\nObservé après implémentation : 27 cas, 27 réussites, code de sortie 0\nLes 24 cas de référence étaient inchangés dans les deux états\nLes bornes attendues dans {{strings:invariant.files.test}} sont des nombres littéraux, donc une constante erronée échoue quand même\nAcceptez, refusez ou révisez. La reprise est une réinitialisation, pas une réécriture.",
+          "notes": "Invite à utiliser : aucune. Il s'agit d'une relecture humaine de ce que S19 a produit, et cette relecture est tout l'objet de la diapositive.\nObservation attendue : le diff touche exactement les trois fichiers autorisés, les cas de référence passent toujours, et les nouveaux cas utilisent des nombres littéraux. Demandez à la salle de nommer une chose à modifier dans le diff généré, et prenez deux réponses.\nNote de sécurité : cette démonstration n'est jamais supprimée, quel que soit le dépassement. C'est le seul endroit où l'objectif de relecture responsable est démontré face à une production réelle. Coupez ailleurs d'abord.\nSolution de repli : si rien n'a été généré en direct, examinez le diff enregistré et la sortie de tests enregistrée, annoncez à voix haute qu'ils sont enregistrés et signalez-les comme enregistrés à l'écran. La discussion de relecture se déroule sans changement.\nTransition : dites que la reprise passe ici par un script de réinitialisation plutôt que par une dispute avec l'outil, puis passez à S21."
+        }
+      }
+    },
+    {
+      "id": "S21",
+      "section": 6,
+      "startMinute": 85,
+      "endMinute": 87,
+      "objectives": ["O1", "O2", "O3", "O5", "O6"],
+      "assetRefs": ["V08"],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "What You Take Away",
+          "text": "It drafts. You decide.\nChoose the surface: ask to understand, edit to change, agent to span files\nA prompt without acceptance tests is a wish\nThe evidence is the diff and the actual test output, not the summary\nExit ticket: name one bounded task for tomorrow and how you will verify it",
+          "notes": "Prompt to use: none. Hand out or open the exit ticket form and give the room the full two minutes to write.\nExpected observation: each learner records one bounded next-day task and the verification step for it. A task with no verification goes back, because the verification is the objective.\nSafety note: collect exit tickets on the prepared form so that responses are retained. Do not collect them on a shared screen where other people's answers are visible.\nFallback: if the form is unavailable, paper index cards work and are collected at the door.\nTransition: move to S22 and take questions with the resources already on screen."
+        },
+        "fr": {
+          "title": "Ce que vous emportez",
+          "text": "Il rédige un brouillon. Vous décidez.\nChoisissez la surface : ask pour comprendre, edit pour modifier, agent pour couvrir plusieurs fichiers\nUne invite sans tests d'acceptation est un souhait\nLes éléments de preuve sont le diff et la sortie réelle des tests, pas le résumé\nBillet de sortie : nommez une tâche délimitée pour demain et la façon dont vous la vérifierez",
+          "notes": "Invite à utiliser : aucune. Distribuez ou ouvrez le formulaire de billet de sortie et laissez à la salle les deux minutes complètes pour écrire.\nObservation attendue : chaque participant consigne une tâche délimitée pour le lendemain et l'étape de vérification associée. Une tâche sans vérification est renvoyée, car la vérification est l'objectif.\nNote de sécurité : recueillez les billets de sortie sur le formulaire préparé afin que les réponses soient conservées. Ne les recueillez pas sur un écran partagé où les réponses des autres seraient visibles.\nSolution de repli : si le formulaire est indisponible, des fiches papier font l'affaire et se recueillent à la porte.\nTransition : passez à S22 et prenez les questions avec les ressources déjà affichées."
+        }
+      }
+    },
+    {
+      "id": "S22",
+      "section": 6,
+      "startMinute": 87,
+      "endMinute": 90,
+      "objectives": ["O6"],
+      "assetRefs": [],
+      "invariantRefs": [],
+      "locales": {
+        "en": {
+          "title": "Next Steps and Questions",
+          "text": "Take the exit ticket with you: one task, one verification, tomorrow\nThe workshop site carries the schedule, every prompt, and the resources list\nEvery page is available in English and in French\nQuestions",
+          "notes": "Prompt to use: none.\nExpected observation: questions cluster on entitlement, on private code, and on review duty. Answer the first two by pointing at the resources page rather than by speculating.\nSafety note: if a question asks about using this with customer or regulated material, say that it is out of scope for this session and that it is a data-handling decision owned elsewhere. Do not improvise a policy answer.\nFallback: if the session is running over, close on the exit ticket sentence and take remaining questions after the scheduled end.\nTransition: end here. The session is over at minute 90."
+        },
+        "fr": {
+          "title": "Prochaines étapes et questions",
+          "text": "Emportez votre billet de sortie : une tâche, une vérification, demain\nLe site de l'atelier porte l'horaire, chaque invite et la liste des ressources\nChaque page est disponible en anglais et en français\nQuestions",
+          "notes": "Invite à utiliser : aucune.\nObservation attendue : les questions se concentrent sur les droits d'accès, sur le code privé et sur le devoir de relecture. Répondez aux deux premières en renvoyant à la page des ressources plutôt qu'en spéculant.\nNote de sécurité : si une question porte sur l'utilisation de cet outil avec du matériel client ou réglementé, dites que cela sort du périmètre de cette séance et qu'il s'agit d'une décision de traitement des données dont la responsabilité relève d'ailleurs. N'improvisez pas une réponse de politique interne.\nSolution de repli : si la séance déborde, concluez sur la phrase du billet de sortie et prenez les questions restantes après l'heure de fin prévue.\nTransition : terminez ici. La séance est finie à la minute 90."
+        }
+      }
+    }
+  ]
+}
