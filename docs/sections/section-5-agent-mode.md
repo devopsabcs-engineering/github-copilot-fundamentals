@@ -81,6 +81,24 @@ Two clauses in that prompt are load-bearing and must not be removed or paraphras
 
 Without them, an agent that writes its expected values from the new constant produces a suite that passes for any limit value. The review evidence for the responsible-review objective then collapses, even though the run looks green.
 
+### Run the tests
+
+Run every command from `workshop/fixture`. Start from the healthy baseline, because the Activity B fault must not carry into this activity. The reset restores the three lab files, and the test run should report 24 cases, 24 passed, exit code 0.
+
+```powershell
+node scripts/reset.mjs
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+```
+
+After the agent run, rerun the tests and the typecheck to confirm the agent's reported results for yourself:
+
+```powershell
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+npm run typecheck
+```
+
+Expect 27 cases, 27 passed, exit code 0, and a typecheck with no errors. A run with 5 failures in the step 2 and step 3 groups means the Activity B fault was still present, so the baseline was not reset first.
+
 ### Acceptance
 
 * Mechanical gate: the diff touches only the three permitted files, every baseline case still passes, and the new boundary cases use literal numbers rather than the new constant.

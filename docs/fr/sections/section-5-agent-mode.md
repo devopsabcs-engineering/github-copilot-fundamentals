@@ -85,6 +85,24 @@ Deux clauses de cette invite sont déterminantes et ne doivent être ni retirée
 
 Sans elles, un agent qui écrit ses valeurs attendues à partir de la nouvelle constante produit une suite qui passe pour n'importe quelle valeur de limite. Les éléments de preuve de l'objectif de relecture responsable s'effondrent alors, même si l'exécution paraît verte.
 
+### Lancer les tests
+
+Exécutez chaque commande depuis `workshop/fixture`. Partez de la référence saine, car l'anomalie de l'activité B ne doit pas se reporter sur cette activité. La réinitialisation restaure les trois fichiers d'exercice, et l'exécution des tests doit indiquer 24 cas, 24 réussites, code de sortie 0.
+
+```powershell
+node scripts/reset.mjs
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+```
+
+Après l'exécution de l'agent, relancez les tests et la vérification de types pour confirmer vous-même les résultats annoncés par l'agent :
+
+```powershell
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+npm run typecheck
+```
+
+Attendez-vous à 27 cas, 27 réussites, code de sortie 0, et à une vérification de types sans erreur. Une exécution avec 5 échecs dans les groupes des étapes 2 et 3 signifie que l'anomalie de l'activité B était encore présente, et donc que la référence n'a pas été réinitialisée au préalable.
+
 ### Acceptation
 
 * Contrôle mécanique : le diff ne touche que les trois fichiers autorisés, tous les cas de référence passent encore, et les nouveaux cas limites utilisent des nombres littéraux plutôt que la nouvelle constante.
