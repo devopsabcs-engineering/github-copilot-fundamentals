@@ -51,6 +51,35 @@ Minutes 62 to 68.
 
 The prompt must name the constant `{{ site.data.strings.invariant.constant_name }}` with the value {{ site.data.strings.invariant.constant_value }}, placement after the enum checks, the exact error text `{{ site.data.strings.invariant.error_message }}`, the three permitted files, and the three boundary cases.
 
+### Reference prompt
+
+Draft your own prompt first, because the drafting is the exercise. Then compare your draft with this reference prompt, or paste it into Copilot Chat to see a proposal-only response. It asks for a proposal only, so Copilot must not edit files or run commands.
+
+```text
+In this synthetic workshop fixture, propose how to add a maximum trimmed title
+length of {{ site.data.strings.invariant.constant_value }} JavaScript UTF-16 code units. This is a proposal only: do not
+edit any file and do not run any command.
+
+Goal: reject a title whose trimmed length is greater than {{ site.data.strings.invariant.constant_value }} code units.
+
+Context: {{ site.data.strings.invariant.files.types }}, {{ site.data.strings.invariant.files.implementation }}, and {{ site.data.strings.invariant.files.test }} in
+lib/scenario-engine/, and the existing validation order.
+
+Constraints: export {{ site.data.strings.invariant.constant_name }} = {{ site.data.strings.invariant.constant_value }} from {{ site.data.strings.invariant.files.types }}. Put the new check
+after the enum checks. Use the error "{{ site.data.strings.invariant.error_message }}".
+Measure UTF-16 code units after trimming, not visible characters. Preserve
+existing enums, public signatures, errors, validation order, and every existing
+test.
+
+Acceptance tests: a {{ site.data.strings.invariant.constant_value }}-unit title is accepted, an 81-unit title is rejected
+with that error, and a {{ site.data.strings.invariant.constant_value }}-unit title padded with spaces is accepted with
+the trimmed title returned. Write those boundaries as literal numbers, not as
+references to {{ site.data.strings.invariant.constant_name }}.
+
+Reply with the proposed change for each of the three files and the three test
+cases. Do not apply them.
+```
+
 ### Acceptance
 
 * Mechanical gate: the prompt contains goal, context, constraints, and acceptance tests.

@@ -51,6 +51,38 @@ Minutes 62 à 68.
 
 L'invite doit nommer la constante `{{ site.data.strings.invariant.constant_name }}` avec la valeur {{ site.data.strings.invariant.constant_value }}, le placement après les contrôles d'énumération, le texte d'erreur exact `{{ site.data.strings.invariant.error_message }}`, les trois fichiers autorisés et les trois cas limites.
 
+### Invite de référence
+
+Rédigez d'abord votre propre invite, car la rédaction est l'exercice. Comparez ensuite votre brouillon avec cette invite de référence, ou collez-la dans Copilot Chat pour obtenir une réponse de proposition uniquement. Elle demande une proposition uniquement : Copilot ne doit ni modifier de fichier ni exécuter de commande.
+
+```text
+Dans ce projet d'exercice synthétique, propose comment ajouter une longueur
+maximale de titre de {{ site.data.strings.invariant.constant_value }} unités de code UTF-16 JavaScript, mesurée après
+suppression des espaces. Il s'agit d'une proposition uniquement : ne modifie
+aucun fichier et n'exécute aucune commande.
+
+Objectif : rejeter un titre dont la longueur après suppression des espaces
+dépasse {{ site.data.strings.invariant.constant_value }} unités de code.
+
+Contexte : {{ site.data.strings.invariant.files.types }}, {{ site.data.strings.invariant.files.implementation }} et {{ site.data.strings.invariant.files.test }} dans
+lib/scenario-engine/, ainsi que l'ordre de validation existant.
+
+Contraintes : exporte {{ site.data.strings.invariant.constant_name }} = {{ site.data.strings.invariant.constant_value }} depuis {{ site.data.strings.invariant.files.types }}. Place le
+nouveau contrôle après les contrôles d'énumération. Utilise l'erreur
+"{{ site.data.strings.invariant.error_message }}". Mesure des unités de code UTF-16
+après suppression des espaces, et non des caractères visibles. Conserve les
+énumérations, les signatures publiques, les erreurs, l'ordre de validation et
+chaque test existants.
+
+Tests d'acceptation : un titre de {{ site.data.strings.invariant.constant_value }} unités est accepté, un titre de 81
+unités est refusé avec cette erreur, et un titre de {{ site.data.strings.invariant.constant_value }} unités entouré
+d'espaces est accepté avec le titre retourné sans ces espaces. Écris ces bornes
+sous forme de nombres littéraux, et non en référence à {{ site.data.strings.invariant.constant_name }}.
+
+Réponds avec la modification proposée pour chacun des trois fichiers et les
+trois cas de test. Ne les applique pas.
+```
+
 ### Acceptation
 
 * Contrôle mécanique : l'invite contient l'objectif, le contexte, les contraintes et les tests d'acceptation.
