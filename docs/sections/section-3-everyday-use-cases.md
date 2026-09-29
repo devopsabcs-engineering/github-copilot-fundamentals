@@ -90,6 +90,15 @@ The reset script restores the healthy baseline and removes the fault. Seed again
 4. Minutes 7 to 9. Restore whitespace rejection, then rerun the test command.
 5. Minutes 10 to 12. Refactor the guard for readability, rerun the test command and `npm run typecheck`, then ask for a change summary and check it against the diff.
 
+After the repair, and again after the refactor, rerun the tests and the typecheck from `workshop/fixture`:
+
+```powershell
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+npm run typecheck
+```
+
+Expect 24 cases, 24 passed, exit code 0, and a typecheck with no errors. A run that still reports 19 passed means the repair was not saved or not applied.
+
 The refactor is a scheduled step, not an optional extra. It is also demonstrated on S10, so that a shortened Activity B still covers refactoring.
 
 Prompt to use:

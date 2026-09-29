@@ -90,6 +90,15 @@ Le script de réinitialisation restaure la référence saine et retire l'anomali
 4. Minutes 7 à 9. Rétablissez le rejet des valeurs composées uniquement d'espaces, puis relancez la commande de test.
 5. Minutes 10 à 12. Remaniez la garde pour la lisibilité, relancez la commande de test et `npm run typecheck`, puis demandez un résumé des modifications et confrontez-le au diff.
 
+Après la correction, puis de nouveau après le remaniement, relancez les tests et la vérification de types depuis `workshop/fixture` :
+
+```powershell
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+npm run typecheck
+```
+
+Attendez-vous à 24 cas, 24 réussites, code de sortie 0, et à une vérification de types sans erreur. Une exécution qui indique encore 19 réussites signifie que la correction n'a pas été enregistrée ou pas appliquée.
+
 Le remaniement est une étape programmée, pas un supplément facultatif. Il est aussi démontré en S10, afin qu'une activité B écourtée couvre encore le remaniement.
 
 Invite à utiliser :
