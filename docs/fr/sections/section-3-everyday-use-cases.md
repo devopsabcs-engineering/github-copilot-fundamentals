@@ -64,11 +64,31 @@ Les deux cas sont des défaillances de la même suppression des espaces perdue, 
 
 Minutes 39 à 51.
 
+### Introduire l'anomalie
+
+Le projet d'exercice validé est la référence saine, avec les 24 cas en réussite. L'anomalie doit donc être introduite volontairement avant le début de l'activité B. Exécutez chaque commande depuis `workshop/fixture`.
+
+```powershell
+cd workshop/fixture
+npm ci
+node scripts/reset.mjs
+node scripts/seed-fault.mjs
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+```
+
+Le script d'introduction modifie une seule ligne de la garde privée des champs de texte libre, en remplaçant `value.trim().length > 0` par `value.length > 0`, et affiche une seule ligne `PASS` ou `FAIL`. Il affiche `FAIL` lorsque la garde n'est plus dans sa forme de référence. Dans ce cas, exécutez `node scripts/reset.mjs` et introduisez l'anomalie de nouveau.
+
+L'exécution des tests doit indiquer 24 cas, 19 réussites, 5 échecs, code de sortie 1. Une exécution qui indique 24 réussites signifie que l'anomalie n'est pas introduite.
+
+Le script de réinitialisation restaure la référence saine et retire l'anomalie. Introduisez-la de nouveau après chaque réinitialisation, y compris entre les répétitions et entre les groupes.
+
+### Déroulement de l'activité
+
 1. Avant l'exécution, notez combien des 24 cas vous vous attendez à voir échouer.
-2. Minutes 1 à 2. Reproduisez l'anomalie et lisez les noms des cinq cas en échec.
+2. Minutes 1 à 2. Lancez la commande de test, confirmez 19 réussites et 5 échecs, et lisez les noms des cinq cas en échec.
 3. Minutes 3 à 6. Localisez la garde privée dans `{{ site.data.strings.invariant.files.implementation }}`.
-4. Minutes 7 à 9. Rétablissez le rejet des valeurs composées uniquement d'espaces, puis relancez.
-5. Minutes 10 à 12. Remaniez la garde pour la lisibilité, relancez, puis demandez un résumé des modifications et confrontez-le au diff.
+4. Minutes 7 à 9. Rétablissez le rejet des valeurs composées uniquement d'espaces, puis relancez la commande de test.
+5. Minutes 10 à 12. Remaniez la garde pour la lisibilité, relancez la commande de test et `npm run typecheck`, puis demandez un résumé des modifications et confrontez-le au diff.
 
 Le remaniement est une étape programmée, pas un supplément facultatif. Il est aussi démontré en S10, afin qu'une activité B écourtée couvre encore le remaniement.
 

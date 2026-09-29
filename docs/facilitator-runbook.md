@@ -148,7 +148,7 @@ Per-activity substitution:
 Trigger: the tool responded, but the result is unusable, the run errors, or the fixture is in an unexpected state.
 
 1. Say out loud what went wrong. A visible failure is useful teaching material and should not be hidden.
-2. Reset the fixture with `node scripts/reset.mjs` from the fixture directory. Recovery is a reset, not an argument with the tool.
+2. Reset the fixture with `node scripts/reset.mjs` from the fixture directory. Recovery is a reset, not an argument with the tool. The reset removes the Activity B fault, so if Activity B has not finished, run `node scripts/seed-fault.mjs` straight after it.
 3. If the reset does not restore a usable state within the remaining window, switch to the recorded assets for that slide and continue.
 4. Do not retry a failed generation more than once inside an activity window.
 
@@ -157,6 +157,7 @@ Assets this fallback needs:
 | Asset | Purpose |
 | --- | --- |
 | `workshop/fixture/scripts/reset.mjs` | Restores the three lab files from the pristine copy |
+| `workshop/fixture/scripts/seed-fault.mjs` | Seeds the Activity B trimming fault again after a reset |
 | `workshop/fixture/.pristine/lib/scenario-engine/` | The pristine copy the reset restores from |
 | `workshop/fixture/scripts/self-check.mjs` | Confirms the environment is usable again, in one line |
 | `workshop/fixture/VERIFICATION.md` | The observed record, so the expected behaviour can be quoted without a live run |
@@ -190,6 +191,7 @@ Judge acceptance on the behavioural conditions in the two-gate table: that the b
 
 * Signed-in editor with Copilot verified on the presenting machine.
 * Fixture installed, one green baseline run observed, reset script exercised once.
+* Activity B fault seeded with `node scripts/seed-fault.mjs` and one run observed at 19 passed and 5 failed, before the session and after any rehearsal reset.
 * Every asset in the Fallback A and Fallback B tables present and reachable offline.
 * Clean capture profile: no customer paths, organization names, account identifiers, branch names, unrelated tabs, or prior chat history on screen.
 * Exit ticket form open and ready.

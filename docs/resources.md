@@ -45,6 +45,7 @@ Files a participant would read:
 | `lib/scenario-engine/{{ site.data.strings.invariant.files.test }}` | The test suite |
 | `scripts/self-check.mjs` | Prints one pass or fail line |
 | `scripts/reset.mjs` | Restores the three lab files from a pristine copy |
+| `scripts/seed-fault.mjs` | Seeds the Activity B trimming fault into the validator |
 | `VERIFICATION.md` | The observed behavioural record, with every count labelled as observed |
 
 Commands, run from the fixture directory:
@@ -54,10 +55,13 @@ npm ci
 npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
 npm run typecheck
 node scripts/self-check.mjs
+node scripts/seed-fault.mjs
 node scripts/reset.mjs
 ```
 
 A passing test run does not establish type correctness, which is why the typecheck is a separate command.
+
+The committed fixture is the healthy baseline. Run `node scripts/seed-fault.mjs` before Activity B to introduce the trimming fault, and `node scripts/reset.mjs` to remove it. A reset always removes the fault, so seed again after every reset. The same scripts are available as `npm run seed`, `npm run reset`, and `npm run self-check`.
 
 ## Invariant software literals
 

@@ -45,6 +45,7 @@ Fichiers qu'un participant lirait :
 | `lib/scenario-engine/{{ site.data.strings.invariant.files.test }}` | La suite de tests |
 | `scripts/self-check.mjs` | Affiche une seule ligne de réussite ou d'échec |
 | `scripts/reset.mjs` | Restaure les trois fichiers d'exercice depuis une copie d'origine |
+| `scripts/seed-fault.mjs` | Introduit l'anomalie de suppression des espaces de l'activité B dans le validateur |
 | `VERIFICATION.md` | Le relevé de comportement observé, où chaque décompte est étiqueté comme observé |
 
 Commandes, exécutées depuis le répertoire du projet d'exercice :
@@ -54,10 +55,13 @@ npm ci
 npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
 npm run typecheck
 node scripts/self-check.mjs
+node scripts/seed-fault.mjs
 node scripts/reset.mjs
 ```
 
 Une exécution de tests réussie n'établit pas la correction des types, et c'est pourquoi la vérification de types est une commande distincte.
+
+Le projet d'exercice validé est la référence saine. Exécutez `node scripts/seed-fault.mjs` avant l'activité B pour introduire l'anomalie de suppression des espaces, et `node scripts/reset.mjs` pour la retirer. Une réinitialisation retire toujours l'anomalie : introduisez-la de nouveau après chaque réinitialisation. Les mêmes scripts sont disponibles sous la forme `npm run seed`, `npm run reset` et `npm run self-check`.
 
 ## Littéraux logiciels invariants
 

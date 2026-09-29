@@ -64,11 +64,31 @@ Both are failures of the same lost trimming, and they surface differently. The p
 
 Minutes 39 to 51.
 
+### Seed the fault
+
+The committed fixture is the healthy baseline, with all 24 cases passing, so the fault must be seeded on purpose before Activity B starts. Run every command from `workshop/fixture`.
+
+```powershell
+cd workshop/fixture
+npm ci
+node scripts/reset.mjs
+node scripts/seed-fault.mjs
+npm test -- lib/scenario-engine/validateGenerateRequest.test.ts
+```
+
+The seed script changes one line in the private free-text guard, replacing `value.trim().length > 0` with `value.length > 0`, and prints one `PASS` or `FAIL` line. It prints `FAIL` when the guard is no longer in its baseline form. In that case, run `node scripts/reset.mjs` and seed again.
+
+The test run should report 24 cases, 19 passed, 5 failed, exit code 1. A run reporting 24 passed means the fault is not seeded.
+
+The reset script restores the healthy baseline and removes the fault. Seed again after every reset, including between rehearsals and between groups.
+
+### Run the activity
+
 1. Before the run, write down how many of the 24 cases you expect to fail.
-2. Minutes 1 to 2. Reproduce the fault and read the five failing names.
+2. Minutes 1 to 2. Run the test command, confirm 19 passed and 5 failed, and read the five failing names.
 3. Minutes 3 to 6. Locate the private guard in `{{ site.data.strings.invariant.files.implementation }}`.
-4. Minutes 7 to 9. Restore whitespace rejection, then rerun.
-5. Minutes 10 to 12. Refactor the guard for readability, rerun, then ask for a change summary and check it against the diff.
+4. Minutes 7 to 9. Restore whitespace rejection, then rerun the test command.
+5. Minutes 10 to 12. Refactor the guard for readability, rerun the test command and `npm run typecheck`, then ask for a change summary and check it against the diff.
 
 The refactor is a scheduled step, not an optional extra. It is also demonstrated on S10, so that a shortened Activity B still covers refactoring.
 

@@ -148,7 +148,7 @@ Substitution par activité :
 Déclencheur : l'outil a répondu, mais le résultat est inexploitable, l'exécution renvoie une erreur, ou le projet d'exercice est dans un état inattendu.
 
 1. Dites à voix haute ce qui a mal tourné. Un échec visible est un matériel pédagogique utile et ne doit pas être caché.
-2. Réinitialisez le projet d'exercice avec `node scripts/reset.mjs` depuis son répertoire. La reprise est une réinitialisation, pas une dispute avec l'outil.
+2. Réinitialisez le projet d'exercice avec `node scripts/reset.mjs` depuis son répertoire. La reprise est une réinitialisation, pas une dispute avec l'outil. La réinitialisation retire l'anomalie de l'activité B : si l'activité B n'est pas terminée, exécutez `node scripts/seed-fault.mjs` immédiatement après.
 3. Si la réinitialisation ne rétablit pas un état exploitable dans la fenêtre restante, basculez sur les ressources enregistrées de cette diapositive et poursuivez.
 4. Ne relancez pas plus d'une fois une génération en échec à l'intérieur d'une fenêtre d'activité.
 
@@ -157,6 +157,7 @@ Ressources dont ce repli a besoin :
 | Ressource | Rôle |
 | --- | --- |
 | `workshop/fixture/scripts/reset.mjs` | Restaure les trois fichiers d'exercice depuis la copie d'origine |
+| `workshop/fixture/scripts/seed-fault.mjs` | Réintroduit l'anomalie de suppression des espaces de l'activité B après une réinitialisation |
 | `workshop/fixture/.pristine/lib/scenario-engine/` | La copie d'origine à partir de laquelle la réinitialisation restaure |
 | `workshop/fixture/scripts/self-check.mjs` | Confirme en une ligne que l'environnement est de nouveau exploitable |
 | `workshop/fixture/VERIFICATION.md` | Le relevé observé, pour citer le comportement attendu sans exécution en direct |
@@ -190,6 +191,7 @@ Jugez l'acceptation sur les conditions de comportement du tableau à deux contr�
 
 * Éditeur connecté avec Copilot vérifié sur la machine de présentation.
 * Projet d'exercice installé, une exécution verte des tests de référence observée, script de réinitialisation exercé une fois.
+* Anomalie de l'activité B introduite avec `node scripts/seed-fault.mjs` et une exécution observée à 19 réussites et 5 échecs, avant la séance et après toute réinitialisation de répétition.
 * Chaque ressource des tableaux des replis A et B présente et accessible hors connexion.
 * Profil de capture propre : aucun chemin client, nom d'organisation, identifiant de compte, nom de branche, onglet sans rapport ni historique de conversation à l'écran.
 * Formulaire de billet de sortie ouvert et prêt.
