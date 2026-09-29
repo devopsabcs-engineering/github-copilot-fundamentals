@@ -21,7 +21,7 @@ const REQUIRED_FIELDS = ['title', 'category', 'summary'] as const;
  * after trimming, so a whitespace-only value is treated as absent.
  */
 function isNonEmptyString(value: unknown): value is string {
-  return typeof value === 'string' && value.trim().length > 0;
+  return typeof value === 'string' && value.length > 0;
 }
 
 /**
